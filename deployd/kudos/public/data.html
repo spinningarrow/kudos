@@ -14,5 +14,23 @@
 	<body>
 		<h1>Kudos - Data</h1>
 		<p>Hi, <strong id="currentuser"></strong>!</p>
+
+		<hr>
+
+		<form id="kudos-create" action="data.html" method="post">
+			<label for="recipient">Recipient (username)</label>
+			<input type="text" name="recipient" id="recipient" placeholder="Type the name of the recipient" required>
+
+			<br><br>
+
+			<label for="kudo-text">Say something nice</label>
+			<textarea name="kudo-text" id="kudo-text"></textarea>
+
+			<br><br>
+
+			<button type="submit">Submit</button>
+		</form>
+
+		<hr>
 	</body>
 </html>
