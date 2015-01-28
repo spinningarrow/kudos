@@ -9,11 +9,20 @@ $(function () {
 		var password = $('#password').val();
 
 		dpd.users.login({ username: username, password: password });
+		location.href = 'data.html';
 
 		return false;
 	});
 
 	// --- Data page ---
+	// Log the user out
+	$('#logout').click(function (event) {
+		event.preventDefault();
+
+		dpd.users.logout();
+		location.href = 'login.html';
+	});
+
 	// Show the current user's name
 	dpd.users.me(function (user) {
 		$('#currentuser').html(user.username);
