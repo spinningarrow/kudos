@@ -24,6 +24,14 @@
 			"required": false,
 			"id": "manager",
 			"order": 2
+		},
+		"fullname": {
+			"name": "fullname",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "fullname",
+			"order": 3
 		}
 	}
 }

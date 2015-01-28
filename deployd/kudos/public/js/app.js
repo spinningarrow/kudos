@@ -34,8 +34,22 @@ $(function () {
 		});
 
 		// Display all kudos, grouped by user
-		dpd.kudos.get(function (kudos) {
-			$('#kudos-list').html(JSON.stringify(kudos));
+		dpd.users.get(function (users) {
+			// $('#kudos-list').html(JSON.stringify(users));
+			var $list = $('<ul/>');
+			var $items = users.map(function (user) {
+				var kudosHtml = user.kudos.map(function (kudo) {
+					return '<li>' +
+						kudo.author +
+						': ' + kudo.text +
+						'</li>';
+				}).join('');
+				return '<li>' + user.username + '<ul>' + kudosHtml + '</ul></li>';
+			});
+
+			$list.append($items);
+
+			$('#kudos-list').html($list);
 		});
 	});
 })

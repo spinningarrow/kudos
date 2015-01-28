@@ -24,6 +24,14 @@
 			"required": false,
 			"id": "text",
 			"order": 2
+		},
+		"date": {
+			"name": "date",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "date",
+			"order": 3
 		}
 	}
 }
