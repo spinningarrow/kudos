@@ -23,7 +23,16 @@ $(function () {
 	}
 
 	hoodie.global.on('add', function (newObj) {
-		$('#data').html(JSON.stringify(newObj.data));
-		console.log('newObj:', newObj);
+		$('#data').html(JSON.stringify(JSON.stringify(newObj.data)));
+		console.log('newObj', newObj.type, newObj.data || newObj.username);
 	})
+
+	hoodie.global.findAll('employee').then(function (employees) {
+		console.log('employees', employees);
+		$('#data-employees').html(JSON.stringify(employees));
+	});
+
+	hoodie.global.findAll('kudo').then(function (kudos) {
+		$('#data-kudos').html(JSON.stringify(kudos));
+	});
 });
