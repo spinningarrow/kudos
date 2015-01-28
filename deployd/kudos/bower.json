@@ -1,0 +1,21 @@
+{
+  "name": "kudos",
+  "version": "0.0.0",
+  "homepage": "https://github.com/spinningarrow/kudos",
+  "authors": [
+    "Sahil Bajaj <sahil29@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/assets/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3"
+  }
+}
