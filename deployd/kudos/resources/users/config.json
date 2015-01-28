@@ -1,0 +1,29 @@
+{
+	"type": "UserCollection",
+	"properties": {
+		"email": {
+			"name": "email",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "email",
+			"order": 0
+		},
+		"teamname": {
+			"name": "teamname",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "teamname",
+			"order": 1
+		},
+		"manager": {
+			"name": "manager",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "manager",
+			"order": 2
+		}
+	}
+}

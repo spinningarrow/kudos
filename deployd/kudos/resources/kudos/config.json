@@ -1,0 +1,29 @@
+{
+	"type": "Collection",
+	"properties": {
+		"author": {
+			"name": "author",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "author",
+			"order": 0
+		},
+		"recipient": {
+			"name": "recipient",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "recipient",
+			"order": 1
+		},
+		"text": {
+			"name": "text",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "text",
+			"order": 2
+		}
+	}
+}
