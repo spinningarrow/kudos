@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Kudos</title>
+
+		<link rel="stylesheet" href="assets/css/normalize.css">
+		<link rel="stylesheet" href="assets/css/kudos.css">
+	</head>
+	<body>
+		<h1>Kudos</h1>
+		<p>Currently logged in user: <span id="current-user"></span> </p>
+		<a id="sign-in" href="#">Sign in</a>
+		<a id="sign-out" href="#" data-hoodie-action="signout">Sign out</a>
+
+		<main>
+			<pre id="data"></pre>
+		</main>
+
+		<script src="assets/vendor/jquery-2.1.0.min.js"></script>
+		<script src="/_api/_files/hoodie.js"></script>
+		<script src="assets/js/app.js"></script>
+	</body>
+</html>
