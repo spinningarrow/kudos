@@ -32,5 +32,10 @@ $(function () {
 
 			return false;
 		});
+
+		// Display all kudos, grouped by user
+		dpd.kudos.get(function (kudos) {
+			$('#kudos-list').html(JSON.stringify(kudos));
+		});
 	});
 })
