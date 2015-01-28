@@ -41,10 +41,11 @@ $(function () {
 
 			return false;
 		});
+	});
 
-		// Display all kudos, grouped by user
+	// Display all kudos, grouped by user
+	function renderData() {
 		dpd.users.get(function (users) {
-			// $('#kudos-list').html(JSON.stringify(users));
 			var $list = $('<ul/>');
 			var $items = users.map(function (user) {
 				var kudosHtml = user.kudos.map(function (kudo) {
@@ -60,5 +61,13 @@ $(function () {
 
 			$('#kudos-list').html($list);
 		});
+
+	}
+
+	renderData();
+
+	// Re-render the list if new kudos are added
+	dpd.on('kudos:created', function (kudo) {
+		renderData();
 	});
 })
