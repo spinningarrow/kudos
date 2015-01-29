@@ -18,7 +18,7 @@ var UsersList = React.createClass({
 	render: function () {
 		var nodes = this.state.data.map(function (user) {
 			return (
-				<li><a href="#" onClick={this.handleUserClick.bind(this, user)}>{user.fullname}</a></li>
+				<li><a href="#" onClick={this.handleUserClick.bind(this, user)}>{user.fullname}</a> ({user.kudos.length})</li>
 			);
 		}.bind(this));
 
