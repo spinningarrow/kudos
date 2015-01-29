@@ -42,7 +42,7 @@ var KudosList = React.createClass({
 			return (
 				<Kudo author={author.fullname} date={moment(kudo.date || new Date().toISOString()).fromNow()}>{kudo.text}</Kudo>
 			);
-		}.bind(this));
+		}.bind(this)).reverse();
 
 		return (
 			<div className="kudos-list">
