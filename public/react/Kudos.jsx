@@ -1,9 +1,9 @@
 var KudosBox = React.createClass({
 	render: function () {
 		return (
-			<div>
+			<div className="kudos-box">
 				<h2>Kudos</h2>
-				<KudosForm />
+				<KudosForm selectedUser={this.props.selectedUser} />
 				<KudosList data={this.props.data} selectedUser={this.props.selectedUser} />
 			</div>
 		);
@@ -34,9 +34,33 @@ var KudosList = React.createClass({
 });
 
 var KudosForm = React.createClass({
+	handleSubmit: function (event) {
+		event.preventDefault();
+
+		// Get the current user's name
+		dpd.users.me(function (user) {
+			if (!user) {
+				return;
+			}
+
+			var recipient = this.props.selectedUser.username;
+			var author = user.username;
+			var text = this.refs.kudoText.getDOMNode().value.trim();
+
+			dpd.kudos.post({
+				recipient: recipient,
+				author: author,
+				text: text
+			});
+		}.bind(this));
+	},
+
 	render: function () {
 		return (
-			<div>Kudos form</div>
+			<form onSubmit={this.handleSubmit}>
+				<textarea ref="kudoText"></textarea>
+				<button type="submit">Submit</button>
+			</form>
 		);
 	}
 });
