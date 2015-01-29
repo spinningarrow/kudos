@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="css/main.css">
 
 		<script src="lib/jquery/dist/jquery.js"></script>
+		<script src="lib/underscore/underscore.js"></script>
 		<script src="dpd.js"></script>
 		<script src="js/app.js"></script>
 
@@ -38,15 +39,27 @@
 				{ author: 'Jordana Walker', text: 'nice is the new cool' }
 			];
 
-			dpd.kudos.get(function (kudos) {
-				kudosData = kudos;
+			dpd.users.get(function (users) {
+				kudosData = users;
+				console.log('users gotten');
 				React.render(<KudosBox data={kudosData} />, document.querySelector('aside'));
+			});
+
+			dpd.on('kudos:created', function (kudo) {
+
+				// Render user list again
+				dpd.users.get(function (users) {
+					userList.setState({ data: users });
+
+					kudosData = users;
+					kudosBox.setProps({ data: kudosData });
+				});
 			});
 
 			React.render(<LoginForm />, document.querySelector('main'));
 			var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('.current-user-badge'));
 			var kudosBox = React.render(<KudosBox data={kudosData} selectedUser={null} />, document.querySelector('aside'));
-			React.render(<UsersList />, document.querySelector('section'));
+			var userList = React.render(<UsersList />, document.querySelector('section'));
 
 			function loginDone() {
 				dpd.users.me(function (user) {

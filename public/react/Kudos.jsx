@@ -12,21 +12,29 @@ var KudosBox = React.createClass({
 
 var KudosList = React.createClass({
 	render: function () {
-		var nodes = this.props.data.filter(function (kudo) {
-			if (this.props.selectedUser) {
-				return kudo.recipient === this.props.selectedUser.username;
-			} else {
-				return true;
-			}
-		}.bind(this)).map(function (kudo) {
+		if (!this.props.selectedUser) {
+			return (<div />);
+		}
+
+		var kudos = _.find(this.props.data, function (user) {
+			return user.username === this.props.selectedUser.username;
+		}, this).kudos;
+
+		var nodes = kudos.map(function (kudo) {
+			// Get author's full name
+			var users = this.props.data;
+			var author = _.find(users, function (user) {
+				return user.username === kudo.author;
+			});
+
 			return (
-				<Kudo author={kudo.author}>{kudo.text}</Kudo>
+				<Kudo author={author.fullname}>{kudo.text}</Kudo>
 			);
-		});
+		}.bind(this));
 
 		return (
 			<div className="kudos-list">
-				selected user: {this.props.selectedUser && this.props.selectedUser.username}
+				{this.props.selectedUser && this.props.selectedUser.fullname}
 				{nodes}
 			</div>
 		);
