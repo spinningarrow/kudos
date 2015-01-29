@@ -37,7 +37,7 @@ var KudosList = React.createClass({
 			});
 
 			return (
-				<Kudo author={author.fullname}>{kudo.text}</Kudo>
+				<Kudo author={author.fullname} date={moment(kudo.date || new Date().toISOString()).fromNow()}>{kudo.text}</Kudo>
 			);
 		}.bind(this));
 
@@ -63,11 +63,16 @@ var KudosForm = React.createClass({
 			var author = user.username;
 			var text = this.refs.kudoText.getDOMNode().value.trim();
 
+			if (!text) return;
+
 			dpd.kudos.post({
 				recipient: recipient,
 				author: author,
-				text: text
-			});
+				text: text,
+				date: new Date().toISOString()
+			}, function () {
+				this.refs.kudoText.getDOMNode().value = '';
+			}.bind(this));
 		}.bind(this));
 	},
 
@@ -87,6 +92,7 @@ var Kudo = React.createClass({
 			<div className="kudo">
 				<span className="kudo-author">{this.props.author}</span>
 				<span className="kudo-text">{this.props.children}</span>
+				<time className="kudo-date">{this.props.date}</time>
 			</div>
 		);
 	}

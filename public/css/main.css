@@ -140,3 +140,9 @@ header h1 {
 .kudo-text {
 	/* color: brown; */
 }
+
+.kudo-date {
+	color: #999;
+	display: block;
+	margin-top: 1em;
+}
