@@ -6,11 +6,16 @@
 
 		<link rel="stylesheet" href="lib/normalize.css/normalize.css">
 		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/graph.css">
 
 		<script src="lib/jquery/dist/jquery.js"></script>
 		<script src="lib/underscore/underscore.js"></script>
 		<script src="lib/moment/moment.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
 		<script src="dpd.js"></script>
+
+		<script type="text/jsx" src="js/divisions.js"></script>
+		<script src="js/colorbrewer.js"></script>
 
 		<script src="lib/react/react.js"></script>
 		<script src="lib/react/JSXTransformer.js"></script>
@@ -23,6 +28,7 @@
 		<main class="main-content">
 			<div class="content-login-form"></div>
 			<div class="content-everything">
+				<div id="divisions"></div>
 				<section class="user-list-section"></section>
 				<aside class="kudos-sidebar"></aside>
 			</div>

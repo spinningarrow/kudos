@@ -1,35 +1,53 @@
 $(function () {
-	// Get the width and height of the viewport
-	var width = $(document).width();
-	var height = $(document).height();
+	var width, height, theme, o, force, kudos, node, link, root, oldColor, xPos, yPos, name;
+	dpd.users.get(function (users) {
+		// Compose data based on users array
+		var data = {
+			name: 'dls',
+			children: []
+		};
+		var groupsMap = _.groupBy(users, function (user) {
+			return user.teamname;
+		});
+		_.each(groupsMap, function (value, key, list) {
+			data.children.push({
+				name: key,
+				_children: value
+			});
+		});
 
-	// Set the color scheme for the nodes
-	var theme = d3.scale.category20();
-	var o = d3.scale.ordinal()
-	    .range(colorbrewer.Set3[12]);
 
-	// Initialise the forces for the graph
-	var force = d3.layout.force()
-		.on('tick', tick)
-		.charge(function (d) { return d._children ? -d.size / 10000 : -500; })
-		// .charge(-50)
-		.gravity(0.05)
-		.linkDistance(function (d) { return d.source._children ? 800 : 300; })
-		.size([width, height]);
+		// Get the width and height of the viewport
+		width = $(document).width();
+		height = $(document).height();
 
-	// Append the actual svg
-	var kudos = d3.select('#divisions').append('svg')
-		.attr('id', 'svg')
-		.attr('width', width)
-		.attr('height', height);
+		// Set the color scheme for the nodes
+		theme = d3.scale.category20();
+		o = d3.scale.ordinal()
+			.range(colorbrewer.Set3[12]);
 
-	// Parse the data
-	var node, link;
-	var root = divisions;
-	var oldColor, xPos, yPos, name;
-	// root.fixed = true;
+		// Initialise the forces for the graph
+		force = d3.layout.force()
+			.on('tick', tick)
+			// .charge(function (d) { return d._children ? -d.size / 10000 : -500; })
+			.charge(-90)
+			.gravity(0.005)
+			.linkDistance(function (d) { return d.source._children ? 800 : 300; })
+			.size([width, height]);
 
-	update();
+		// Append the actual svg
+		kudos = d3.select('#divisions').append('svg')
+			.attr('id', 'svg')
+			.attr('width', width)
+			.attr('height', height);
+
+		// Parse the data
+		root = data;
+		// root.fixed = true;
+
+		update();
+	});
+
 
 	function update() {
 		var nodes = flatten(root);
@@ -81,6 +99,7 @@ $(function () {
 			.style('fill', function (d) { return o(d.name); })
 			.on('click', click)
 			.on('mouseover', function (d) {
+				console.log('hover', d.name || d.fullname);
 				var offset = 45;
 				// var offset = d.children ? 45 : Math.sqrt(d.size) / 10;
 				// var offset = d.children ? 30 : d.size*10;
@@ -173,6 +192,9 @@ $(function () {
 			if (!d._children) {
 				// Toggle sidebar
 				console.log('I am a leaf node');
+
+				var kdb = React.render(<KudosBox data={kudosData} selectedUser={d} />, document.querySelector('aside'));
+				kdb.setState({ hidden: false });
 			}
 
 			d.children = d._children;
