@@ -1,4 +1,53 @@
 body {
-	margin: 0 auto;
-	width: 600px;
+	/* margin: 0 auto; */
+	/* width: 600px; */
+}
+
+header h1 {
+	font-size: 0.8em;
+	font-weight: normal;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	position: absolute;
+	top: 1em;
+	left: 1em;
+}
+
+.current-user-badge {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+}
+
+.login-form {
+	background: rgb(225, 245, 252);
+	border-radius: 100%;
+	box-sizing: border-box;
+	height: 350px;
+	margin: 20% 0 0 30%;
+	padding-top: 13%;
+	text-align: center;
+	width: 350px;
+}
+
+.login-form input {
+	background-color: transparent;
+	border: 0;
+	border-bottom: 1px dotted;
+	margin: 10px;
+	text-align: center;
+}
+
+.login-form input:focus {
+	border-bottom-color: orange;
+	outline: 0;
+}
+
+.login-form button {
+	background-color: transparent;
+	border: 2px solid;
+	font-weight: bold;
+	margin: 20px;
+	padding: 10px 10px 5px;
+	text-transform: uppercase;
 }

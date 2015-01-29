@@ -15,8 +15,10 @@
 		<script src="lib/react/JSXTransformer.js"></script>
 	</head>
 	<body>
-		<h1>Kudos</h1>
-		<header></header>
+		<header>
+			<h1>Kudos</h1>
+			<div class="current-user-badge"></div>
+		</header>
 		<main class="main-content"></main>
 
 		<!-- Login form -->
@@ -55,8 +57,8 @@
 				render: function () {
 					return (
 						<form className="login-form" onSubmit={this.handleSubmit}>
-							<input type="text" placeholder="Username" required ref="username" />
-							<input type="password" placeholder="Password" required ref="password" />
+							<input type="text" placeholder="Username" required ref="username" /><br />
+							<input type="password" placeholder="Password" required ref="password" /><br />
 							<button type="submit">Sign In</button>
 						</form>
 					);
@@ -128,7 +130,7 @@
 		<!-- Render stuff on the page -->
 		<script type="text/jsx">
 			React.render(<LoginForm />, document.querySelector('main'));
-			var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('header'));
+			var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('.current-user-badge'));
 
 			function loginDone() {
 				dpd.users.me(function (user) {
