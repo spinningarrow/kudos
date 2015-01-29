@@ -31,9 +31,19 @@
 
 		<!-- Render stuff on the page -->
 		<script type="text/jsx">
+			var kudosData = [
+				{ author: 'Peter Hunter', text: 'awesome is the new awesome' },
+				{ author: 'Jordana Walker', text: 'nice is the new cool' }
+			];
+
+			dpd.kudos.get(function (kudos) {
+				kudosData = kudos;
+				React.render(<KudosBox data={kudosData} />, document.querySelector('aside'));
+			});
+
 			React.render(<LoginForm />, document.querySelector('main'));
 			var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('.current-user-badge'));
-			React.render(<KudosBox />, document.querySelector('aside'));
+			var kudosBox = React.render(<KudosBox data={kudosData} />, document.querySelector('aside'));
 
 			function loginDone() {
 				dpd.users.me(function (user) {
