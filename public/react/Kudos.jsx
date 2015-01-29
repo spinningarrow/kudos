@@ -3,7 +3,9 @@ var KudosBox = React.createClass({
 		return { hidden: true };
 	},
 
-	hideBox: function () {
+	hideBox: function (event) {
+		event.preventDefault();
+
 		this.setState({ hidden: true });
 	},
 
