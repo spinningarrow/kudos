@@ -4,7 +4,7 @@ var KudosBox = React.createClass({
 			<div>
 				<h2>Kudos</h2>
 				<KudosForm />
-				<KudosList data={this.props.data} />
+				<KudosList data={this.props.data} selectedUser={this.props.selectedUser} />
 			</div>
 		);
 	}
@@ -12,7 +12,13 @@ var KudosBox = React.createClass({
 
 var KudosList = React.createClass({
 	render: function () {
-		var nodes = this.props.data.map(function (kudo) {
+		var nodes = this.props.data.filter(function (kudo) {
+			if (this.props.selectedUser) {
+				return kudo.recipient === this.props.selectedUser.username;
+			} else {
+				return true;
+			}
+		}.bind(this)).map(function (kudo) {
 			return (
 				<Kudo author={kudo.author}>{kudo.text}</Kudo>
 			);
@@ -20,6 +26,7 @@ var KudosList = React.createClass({
 
 		return (
 			<div className="kudos-list">
+				selected user: {this.props.selectedUser && this.props.selectedUser.username}
 				{nodes}
 			</div>
 		);
@@ -38,8 +45,8 @@ var Kudo = React.createClass({
 	render: function () {
 		return (
 			<div className="kudo">
-				<h3 class="kudo-author">{this.props.author}</h3>
-				<p class="kudo-text">{this.props.children}</p>
+				<h3 className="kudo-author">{this.props.author}</h3>
+				<p className="kudo-text">{this.props.children}</p>
 			</div>
 		);
 	}
