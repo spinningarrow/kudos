@@ -1,0 +1,118 @@
+var data = {
+	"nodes": [
+		{
+			"name": "Group1-1",
+			"group": "DLS",
+			"radius": 50
+		},
+		{
+			"name": "Group1-2",
+			"group": "PLM"
+		},
+		{
+			"name": "Group1-3",
+			"group": "WIPDM"
+		},
+		{
+			"name": "Group1-4",
+			"group": "COMET",
+			"radius": 13
+		},
+		{
+			"name": "Group2-1",
+			"group": "VAULT"
+		},
+		{
+			"name": "Group2-2",
+			"group": "PandA",
+			"radius": 5
+		},
+		{
+			"name": "Group2-3",
+			"group": "SOMETHING"
+		},
+		{
+			"name": "Group2-4",
+			"group": "SOMETHING ELSE"
+		},
+		{
+			"name": "Group3-1",
+			"group": 10
+		},
+		{
+			"name": "Group3-2",
+			"group": 11,
+			"radius": 40
+		},
+		{
+			"name": "Group3-3",
+			"group": 12
+		},
+		{
+			"name": "Group3-4",
+			"group": "SOMETHING"
+		}
+	],
+	"links": [
+		{
+			"source": 1,
+			"target": 0,
+			"value": 1
+		},
+		{
+			"source": 2,
+			"target": 0,
+			"value": 1
+		},
+		{
+			"source": 3,
+			"target": 0,
+			"value": 1
+		},
+		{
+			"source": 4,
+			"target": 0,
+			"value": 1
+		},
+		{
+			"source": 5,
+			"target": 0,
+			"value": 1
+		},
+		{
+			"source": 6,
+			"target": 0,
+			"value": 1
+		},
+		{
+			"source": 7,
+			"target": 0,
+			"value": 1
+		},
+		{
+			"source": 8,
+			"target": 0,
+			"value": 1
+		},
+		{
+			"source": 9,
+			"target": 2,
+			"value": 1
+		},
+		{
+			"source": 10,
+			"target": 4,
+			"value": 1
+		},
+		{
+			"source": 11,
+			"target": 8,
+			"value": 1
+		},
+		{
+			"source": 11,
+			"target": 1,
+			"value": 1
+		}
+	]
+};
