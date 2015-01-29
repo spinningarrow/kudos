@@ -24,24 +24,24 @@ $(function () {
 	});
 
 	// Show the current user's name
-	dpd.users.me(function (user) {
-		$('#currentuser').html(user.username);
-
-		// Submit a new kudo
-		$('#kudos-create').submit(function () {
-			var recipient = $('#recipient').val();
-			var text = $('#kudo-text').val();
-			var author = user.username;
-
-			dpd.kudos.post({
-				recipient: recipient,
-				author: author,
-				text: text
-			});
-
-			return false;
-		});
-	});
+	// dpd.users.me(function (user) {
+	// 	$('#currentuser').html(user.username);
+        //
+	// 	// Submit a new kudo
+	// 	$('#kudos-create').submit(function () {
+	// 		var recipient = $('#recipient').val();
+	// 		var text = $('#kudo-text').val();
+	// 		var author = user.username;
+        //
+	// 		dpd.kudos.post({
+	// 			recipient: recipient,
+	// 			author: author,
+	// 			text: text
+	// 		});
+        //
+	// 		return false;
+	// 	});
+	// });
 
 	// Display all kudos, grouped by user
 	function renderData() {
