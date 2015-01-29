@@ -64,12 +64,79 @@ header h1 {
 
 /*--- kudos ---*/
 .kudos-box {
-	background: #fafad2;
+	background: #fdfdfd;
 	bottom: 0;
+	box-shadow: 0 0 10px 5px rgba(204, 204, 204, 0.24);
+	font-size: 0.8em;
 	overflow: auto;
 	padding: 1em;
 	position: fixed;
 	right: 0;
 	top: 0;
+	transition: margin 0.2s ease-in;
 	width: 30%;
+}
+
+.kudos-box.hidden {
+	margin-right: -100%;
+}
+
+.kudos-box .close-kudos-box {
+	color: #ccc;
+	float: right;
+	font-size: 1.4em;
+	text-decoration: none;
+}
+
+.kudos-box .close-kudos-box:hover {
+	color: #60BAF0;
+}
+
+.kudos-box textarea {
+	border-color: #ccc;
+	border-width: 2px;
+	box-sizing: border-box;
+	height: 4em;
+	padding: 5px;
+	width: 100%;
+}
+
+.kudos-box textarea:focus {
+	border-color: #60BAF0;
+	outline: 0;
+}
+
+.kudos-box button {
+	background-color: transparent;
+	border: 2px solid #ccc;
+	border-radius: 0;
+	color: #999;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin-bottom: 2em;
+	padding: 5px 9px 3px;
+	text-transform: uppercase;
+}
+
+.kudos-box button:hover {
+	border-color: #60BAF0;
+	color: #60BAF0;
+}
+
+.kudo {
+	border-top: 1px solid #f9f9f9;
+	padding: 10px 0;
+}
+
+.kudo-author {
+	/* color: green; */
+	font-weight: bold;
+}
+
+.kudo-author::after {
+	content: ' ';
+}
+
+.kudo-text {
+	/* color: brown; */
 }

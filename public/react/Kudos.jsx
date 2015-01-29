@@ -1,27 +1,21 @@
 var KudosBox = React.createClass({
 	getInitialState: function () {
-		return { visible: false };
+		return { hidden: true };
 	},
 
 	hideBox: function () {
-		this.setState({ visible: false });
+		this.setState({ hidden: true });
 	},
 
 	render: function () {
-		if (this.state.visible) {
-			return (
-				<div className="kudos-box">
-					<a href="#" className="close-kudos-box" onClick={this.hideBox}>&times;</a>
-					<h2>Kudos</h2>
-					<KudosForm selectedUser={this.props.selectedUser} />
-					<KudosList data={this.props.data} selectedUser={this.props.selectedUser} />
-				</div>
-			);
-		} else {
-			return (
-				<div />
-			);
-		}
+		return (
+			<div className={ this.state.hidden ? 'kudos-box hidden' : 'kudos-box' }>
+				<a href="#" className="close-kudos-box" onClick={this.hideBox}>&times;</a>
+				<h2>{this.props.selectedUser && this.props.selectedUser.fullname}</h2>
+				<KudosForm selectedUser={this.props.selectedUser} />
+				<KudosList data={this.props.data} selectedUser={this.props.selectedUser} />
+			</div>
+		);
 	}
 });
 
@@ -49,7 +43,6 @@ var KudosList = React.createClass({
 
 		return (
 			<div className="kudos-list">
-				{this.props.selectedUser && this.props.selectedUser.fullname}
 				{nodes}
 			</div>
 		);
@@ -92,8 +85,8 @@ var Kudo = React.createClass({
 	render: function () {
 		return (
 			<div className="kudo">
-				<h3 className="kudo-author">{this.props.author}</h3>
-				<p className="kudo-text">{this.props.children}</p>
+				<span className="kudo-author">{this.props.author}</span>
+				<span className="kudo-text">{this.props.children}</span>
 			</div>
 		);
 	}
