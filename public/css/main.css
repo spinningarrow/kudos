@@ -75,7 +75,7 @@ header h1 {
 	right: 0;
 	top: 0;
 	transition: margin 0.2s ease-in;
-	width: 30%;
+	width: 350px;
 }
 
 .kudos-box.hidden {
@@ -108,6 +108,10 @@ header h1 {
 	display: inline-block;
 	line-height: 50px;
 	vertical-align: top;
+	max-width: 75%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .kudos-box textarea {
