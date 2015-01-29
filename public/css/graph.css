@@ -3,6 +3,10 @@
 	height: 100%;
 }*/
 
+#divisions {
+	margin-top: 40px;
+}
+
 .link {
 	stroke: orange;
 	stroke-opacity: .6;

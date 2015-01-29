@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Kudos - Login</title>
+		<title>Kudos</title>
 
 		<link rel="stylesheet" href="lib/normalize.css/normalize.css">
 		<link rel="stylesheet" href="css/main.css">
@@ -59,17 +59,22 @@
 
 				// Render user list again
 				dpd.users.get(function (users) {
-					userList.setState({ data: users });
+					// userList.setState({ data: users });
 
 					kudosData = users;
 					kudosBox.setProps({ data: kudosData });
 				});
+
+				// Transition node (tricky)
+				var node = d3.select('.node.' + kudo.recipient);
+				var originalRadius = node.attr('r');
+				node.transition().duration(150).attr('r', +originalRadius + 100).transition().attr('r', originalRadius);
 			});
 
 			React.render(<LoginForm />, document.querySelector('.content-login-form'));
 			var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('.current-user-badge'));
 			var kudosBox = React.render(<KudosBox data={kudosData} selectedUser={null} />, document.querySelector('aside'));
-			var userList = React.render(<UsersList />, document.querySelector('section'));
+			// var userList = React.render(<UsersList />, document.querySelector('section'));
 
 			function loginDone() {
 				dpd.users.me(function (user) {

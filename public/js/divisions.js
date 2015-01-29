@@ -1,9 +1,10 @@
 $(function () {
-	var width, height, theme, o, force, kudos, node, link, root, oldColor, xPos, yPos, name;
+	var data, width, height, theme, o, force, kudos, node, link, root, oldColor, xPos, yPos, name;
 	dpd.users.get(function (users) {
 		// Compose data based on users array
-		var data = {
+		data = {
 			name: 'dls',
+			isRoot: true,
 			children: []
 		};
 		var groupsMap = _.groupBy(users, function (user) {
@@ -30,9 +31,13 @@ $(function () {
 		force = d3.layout.force()
 			.on('tick', tick)
 			// .charge(function (d) { return d._children ? -d.size / 10000 : -500; })
-			.charge(-90)
+			.charge(-250)
 			.gravity(0.005)
-			.linkDistance(function (d) { return d.source._children ? 800 : 300; })
+			.linkDistance(function (d) {
+				// console.log('link distance', d)
+				return d.target._children ? 200 : 150;
+			})
+			//.linkDistance(300)
 			.size([width, height]);
 
 		// Append the actual svg
@@ -43,7 +48,10 @@ $(function () {
 
 		// Parse the data
 		root = data;
-		// root.fixed = true;
+		root.fixed = true;
+		console.log(root);
+		root.px = width/2;
+		root.py = height/2;
 
 		update();
 	});
@@ -81,40 +89,63 @@ $(function () {
 			.data(nodes, function(d) { return d.id; })
 
 		node.transition()
-			.attr('r', 45);
+			// .style('fill', 'black')
+			// .attr('r', 20);
 			// .attr('r', function (d) { return d.children ? 45 : Math.sqrt(d.size) / 10; });
 			// .attr('r', function (d) { return d.children ? 30 : d.size*10; });
 
 		// Enter any new nodes
+		var r = 20;
 		node
 			.enter()
 			.append('svg:circle')
-			.attr('class', 'node')
-			.attr('cx', function (d) { return d.x; })
-			.attr('cy', function (d) { return d.y; })
-			.attr('r', 45)
+			.attr('class', function (d) {
+				var classes = ['node'];
+				d.username && classes.push(d.username);
+				return classes.join(' ');
+			})
+			.attr('cx', function (d) {
+				return d.x;
+			})
+			.attr('cy', function (d) {
+				return d.y;
+			})
+			.attr('r', function (d) {
+				if (d.isRoot) return d.r = r * 3;
+				return d._children ? d.r = r * 2 : r
+			})
 				// return d.children ? 45 : Math.sqrt(d.size) / 10;
 				// return d.children ? 30 : d.size*10;
 			// })
-			.style('fill', function (d) { return o(d.name); })
+			.style('fill', function (d) {
+				// console.log('o', o);
+				return o(d.name || d.teamname);
+			})
 			.on('click', click)
 			.on('mouseover', function (d) {
-				console.log('hover', d.name || d.fullname);
-				var offset = 45;
+				// console.log('hover', d.name || d.fullname);
+				var offset = r;
 				// var offset = d.children ? 45 : Math.sqrt(d.size) / 10;
 				// var offset = d.children ? 30 : d.size*10;
-				name = d.name;
+				// name = d.name;
 				xPos = d.x - offset/4;
 				yPos = d.y;
 				oldColor = d3.select(this).style('fill');
 				d3.select(this).style('fill', 'black');
-				kudos
+				var y = kudos
 					.append('text')
-					.attr('id', 'text')
-					.attr('dx', xPos)
-					.attr('dy', yPos)
-					.style('fill', '#FFFFFF')
-					.text(name);
+
+					y.attr('id', 'text')
+					.attr('dx', d.x)
+					.attr('dy', d.y + 5)
+					.style('fill', '#000')
+					.text(d.name ? d.name.toUpperCase() : d.fullname + ' (' + d.kudos.length + ')');
+
+				var bbox = y.node().getBBox();
+				y.attr('dx', d.x - bbox.width/2);
+				y.attr('dy', d.y + (d.r || offset) + bbox.height);
+
+				var that = this;
 			})
 			.on('mouseout', function (d) {
 				d3.select(this).style('fill', oldColor);
