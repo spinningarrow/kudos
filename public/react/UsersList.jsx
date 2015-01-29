@@ -12,7 +12,8 @@ var UsersList = React.createClass({
 	handleUserClick: function (user, event) {
 		event.preventDefault();
 		console.log('handleuserclick');
-		React.render(<KudosBox data={kudosData} selectedUser={user} />, document.querySelector('aside'));
+		var kdb = React.render(<KudosBox data={kudosData} selectedUser={user} />, document.querySelector('aside'));
+		kdb.setState({ visible: true });
 	},
 
 	render: function () {

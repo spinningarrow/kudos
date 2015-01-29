@@ -1,12 +1,27 @@
 var KudosBox = React.createClass({
+	getInitialState: function () {
+		return { visible: false };
+	},
+
+	hideBox: function () {
+		this.setState({ visible: false });
+	},
+
 	render: function () {
-		return (
-			<div className="kudos-box">
-				<h2>Kudos</h2>
-				<KudosForm selectedUser={this.props.selectedUser} />
-				<KudosList data={this.props.data} selectedUser={this.props.selectedUser} />
-			</div>
-		);
+		if (this.state.visible) {
+			return (
+				<div className="kudos-box">
+					<a href="#" className="close-kudos-box" onClick={this.hideBox}>&times;</a>
+					<h2>Kudos</h2>
+					<KudosForm selectedUser={this.props.selectedUser} />
+					<KudosList data={this.props.data} selectedUser={this.props.selectedUser} />
+				</div>
+			);
+		} else {
+			return (
+				<div />
+			);
+		}
 	}
 });
 
