@@ -21,9 +21,13 @@
 			<h1>Kudos</h1>
 			<div class="current-user-badge"></div>
 		</header>
-		<main class="main-content"></main>
-		<section class="user-list-section"></section>
-		<aside class="kudos-sidebar"></aside>
+		<main class="main-content">
+			<div class="content-login-form"></div>
+			<div class="content-everything">
+				<section class="user-list-section"></section>
+				<aside class="kudos-sidebar"></aside>
+			</div>
+		</main>
 
 		<!-- React components -->
 		<script type="text/jsx" src="react/LoginForm.jsx"></script>
@@ -57,7 +61,7 @@
 				});
 			});
 
-			React.render(<LoginForm />, document.querySelector('main'));
+			React.render(<LoginForm />, document.querySelector('.content-login-form'));
 			var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('.current-user-badge'));
 			var kudosBox = React.render(<KudosBox data={kudosData} selectedUser={null} />, document.querySelector('aside'));
 			var userList = React.render(<UsersList />, document.querySelector('section'));
@@ -65,14 +69,30 @@
 			function loginDone() {
 				dpd.users.me(function (user) {
 					currentUserBox.setState({ user: user.fullname });
+					// $('main').hide();
+					toggleSections('everything');
 				});
 			}
 
+			function toggleSections(sectionToShow) {
+				$('.content-login-form').hide();
+				$('.content-everything').hide();
+
+				if (sectionToShow === 'login') {
+					$('.content-login-form').show();
+				} else if (sectionToShow === 'everything') {
+					$('.content-everything').show();
+				}
+			}
+
+			toggleSections(); // hide everything
 			// Hide login form if logged in
-			$('main').hide();
+			// $('main').hide();
 			dpd.users.me(function (user) {
 				if (!user) {
-					$('main').show();
+					toggleSections('login');
+				} else {
+					toggleSections('everything');
 				}
 			});
 		</script>

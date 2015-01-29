@@ -15,6 +15,8 @@ var CurrentUserBox = React.createClass({
 		dpd.users.logout(function (result, error) {
 			if (!error) {
 				this.setState({ user: '' });
+				// $('main').show();
+				toggleSections('login');
 			}
 		}.bind(this));
 	},
