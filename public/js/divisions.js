@@ -215,6 +215,7 @@ $(function () {
 
 	// Toggle children on click
 	function click(d) {
+		if (d.isRoot) return;
 		if (d.children) {
 			d._children = d.children;
 			d.children = null;
@@ -224,7 +225,8 @@ $(function () {
 				// Toggle sidebar
 				console.log('I am a leaf node');
 
-				var kdb = React.render(<KudosBox data={kudosData} selectedUser={d} />, document.querySelector('aside'));
+				var kdbnode = React.createElement(KudosBox, { data: kudosData, selectedUser: d });
+				var kdb = React.render(kdbnode, document.querySelector('aside'));
 				kdb.setState({ hidden: false });
 			}
 
