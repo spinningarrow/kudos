@@ -2,6 +2,12 @@ body {
 	/* margin: 0 auto; */
 	/* width: 600px; */
 	font-family: 'source sans pro';
+	overflow: hidden; /* d3 overflows */
+	transition: margin 0.1s ease;
+}
+
+body.box-open {
+    margin-left: -300px;
 }
 
 /*--- header ---*/
@@ -65,7 +71,7 @@ header h1 {
 
 /*--- kudos ---*/
 .kudos-box {
-	background: #fdfdfd;
+	background: rgba(253, 253, 253, 0.95);
 	bottom: 0;
 	box-shadow: 0 0 10px 5px rgba(204, 204, 204, 0.24);
 	font-size: 0.9em;

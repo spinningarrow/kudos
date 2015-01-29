@@ -10,6 +10,7 @@ var KudosBox = React.createClass({
 	},
 
 	render: function () {
+		$('body').toggleClass('box-open', !this.state.hidden);
 		return (
 			<div className={ this.state.hidden ? 'kudos-box hidden' : 'kudos-box' }>
 				<a href="#" className="close-kudos-box" onClick={this.hideBox}>&times;</a>
