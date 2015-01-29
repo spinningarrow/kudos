@@ -15,7 +15,7 @@
 		<script src="lib/react/JSXTransformer.js"></script>
 	</head>
 	<body>
-		<h1>Kudos - deployd</h1>
+		<h1>Kudos</h1>
 		<header></header>
 		<main class="main-content"></main>
 
@@ -72,7 +72,7 @@
 
 				componentDidMount: function () {
 					dpd.users.me(function (user) {
-						this.setState({user: user ? user.username : ''});
+						this.setState({user: user ? user.fullname : ''});
 					}.bind(this));
 				},
 
@@ -132,7 +132,7 @@
 
 			function loginDone() {
 				dpd.users.me(function (user) {
-					currentUserBox.setState({ user: user.username });
+					currentUserBox.setState({ user: user.fullname });
 				});
 			}
 		</script>
