@@ -20,17 +20,20 @@
 			<div class="current-user-badge"></div>
 		</header>
 		<main class="main-content"></main>
+		<aside class="kudos-sidebar"></aside>
 
 		<!-- React components -->
 		<script type="text/jsx" src="react/LoginForm.jsx"></script>
 		<script type="text/jsx" src="react/CurrentUserBox.jsx"></script>
 		<script type="text/jsx" src="react/SignedInUser.jsx"></script>
 		<script type="text/jsx" src="react/SignedOutUser.jsx"></script>
+		<script type="text/jsx" src="react/Kudos.jsx"></script>
 
 		<!-- Render stuff on the page -->
 		<script type="text/jsx">
 			React.render(<LoginForm />, document.querySelector('main'));
 			var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('.current-user-badge'));
+			React.render(<KudosBox />, document.querySelector('aside'));
 
 			function loginDone() {
 				dpd.users.me(function (user) {
