@@ -66,6 +66,14 @@
 					currentUserBox.setState({ user: user.fullname });
 				});
 			}
+
+			// Hide login form if logged in
+			$('main').hide();
+			dpd.users.me(function (user) {
+				if (!user) {
+					$('main').show();
+				}
+			});
 		</script>
 	</body>
 </html>
