@@ -11,7 +11,10 @@ var KudosBox = React.createClass({
 		return (
 			<div className={ this.state.hidden ? 'kudos-box hidden' : 'kudos-box' }>
 				<a href="#" className="close-kudos-box" onClick={this.hideBox}>&times;</a>
-				<h2>{this.props.selectedUser && this.props.selectedUser.fullname}</h2>
+				<h2>
+					<img src={this.props.selectedUser && 'images/' + this.props.selectedUser.username + '.jpg'} />
+					<span className="kudos-user">{this.props.selectedUser && this.props.selectedUser.fullname}</span>
+				</h2>
 				<KudosForm selectedUser={this.props.selectedUser} />
 				<KudosList data={this.props.data} selectedUser={this.props.selectedUser} />
 			</div>
