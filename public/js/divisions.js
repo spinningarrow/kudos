@@ -19,8 +19,8 @@ $(function () {
 
 
 		// Get the width and height of the viewport
-		width = $(document).width();
-		height = $(document).height();
+		width = $(document).width() - 50;
+		height = $(document).height() - 100;
 
 		// Set the color scheme for the nodes
 		theme = d3.scale.category20();
@@ -50,8 +50,8 @@ $(function () {
 		root = data;
 		root.fixed = true;
 		console.log(root);
-		root.px = width/2;
-		root.py = height/2;
+		root.px = width/2 - 50;
+		root.py = height/2 - 25;
 
 		update();
 	});
