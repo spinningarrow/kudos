@@ -97,7 +97,7 @@ var KudosForm = React.createClass({
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<textarea ref="kudoText"></textarea>
-				<button type="submit">Submit</button>
+				<button type="submit">Send Kudos!</button>
 			</form>
 		);
 	}
