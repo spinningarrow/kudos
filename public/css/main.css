@@ -1,7 +1,7 @@
 body {
 	/* margin: 0 auto; */
 	/* width: 600px; */
-	font-family: 'source sans pro';
+	font-family: 'source sans pro', source-sans-pro, sans-serif;
 	overflow: hidden; /* d3 overflows */
 	transition: margin 0.1s ease;
 }

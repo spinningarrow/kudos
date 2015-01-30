@@ -1,59 +1,63 @@
 $(function () {
 	var data, width, height, theme, o, force, kudos, node, link, root, oldColor, xPos, yPos, name;
-	dpd.users.get(function (users) {
-		// Compose data based on users array
-		data = {
-			name: 'dls',
-			isRoot: true,
-			children: []
-		};
-		var groupsMap = _.groupBy(users, function (user) {
-			return user.teamname;
-		});
-		_.each(groupsMap, function (value, key, list) {
-			data.children.push({
-				name: key,
-				_children: value
+	var currentUser;
+	dpd.users.me(function (me) {
+		currentUser = me;
+		dpd.users.get(function (users) {
+			// Compose data based on users array
+			data = {
+				name: 'dls',
+				isRoot: true,
+				children: []
+			};
+			var groupsMap = _.groupBy(users, function (user) {
+				return user.teamname;
 			});
+			_.each(groupsMap, function (value, key, list) {
+				data.children.push({
+					name: key,
+					_children: value
+				});
+			});
+
+
+			// Get the width and height of the viewport
+			width = $(document).width() - 50;
+			height = $(document).height() - 100;
+
+			// Set the color scheme for the nodes
+			theme = d3.scale.category20();
+			o = d3.scale.ordinal()
+				.range(colorbrewer.Set3[12]);
+
+			// Initialise the forces for the graph
+			force = d3.layout.force()
+				.on('tick', tick)
+				// .charge(function (d) { return d._children ? -d.size / 10000 : -500; })
+				.charge(-250)
+				.gravity(0.005)
+				.linkDistance(function (d) {
+					// console.log('link distance', d)
+					return d.target._children ? 200 : 150;
+				})
+				//.linkDistance(300)
+				.size([width, height]);
+
+			// Append the actual svg
+			kudos = d3.select('#divisions').append('svg')
+				.attr('id', 'svg')
+				.attr('width', width)
+				.attr('height', height);
+
+			// Parse the data
+			root = data;
+			root.fixed = true;
+			console.log(root);
+			root.px = width/2 - 50;
+			root.py = height/2 - 25;
+
+			update();
 		});
-
-
-		// Get the width and height of the viewport
-		width = $(document).width() - 50;
-		height = $(document).height() - 100;
-
-		// Set the color scheme for the nodes
-		theme = d3.scale.category20();
-		o = d3.scale.ordinal()
-			.range(colorbrewer.Set3[12]);
-
-		// Initialise the forces for the graph
-		force = d3.layout.force()
-			.on('tick', tick)
-			// .charge(function (d) { return d._children ? -d.size / 10000 : -500; })
-			.charge(-250)
-			.gravity(0.005)
-			.linkDistance(function (d) {
-				// console.log('link distance', d)
-				return d.target._children ? 200 : 150;
-			})
-			//.linkDistance(300)
-			.size([width, height]);
-
-		// Append the actual svg
-		kudos = d3.select('#divisions').append('svg')
-			.attr('id', 'svg')
-			.attr('width', width)
-			.attr('height', height);
-
-		// Parse the data
-		root = data;
-		root.fixed = true;
-		console.log(root);
-		root.px = width/2 - 50;
-		root.py = height/2 - 25;
-
-		update();
 	});
 
 
@@ -261,7 +265,7 @@ $(function () {
 				// Toggle sidebar
 				console.log('I am a leaf node');
 
-				var kdbnode = React.createElement(KudosBox, { data: kudosData, selectedUser: d });
+				var kdbnode = React.createElement(KudosBox, { data: kudosData, selectedUser: d, currentUser: currentUser });
 				var kdb = React.render(kdbnode, document.querySelector('aside'));
 				kdb.setState({ hidden: false });
 			}
