@@ -194,6 +194,42 @@ $(function () {
 		node.exit().remove();
 	};
 
+	dpd.on('kudos:created', function (kudo) {
+		// Transition node (tricky)
+		var node = d3.select('.node.' + kudo.recipient);
+		var originalRadius = node.attr('r');
+		node.transition().duration(150).attr('r', +originalRadius + 100).transition().attr('r', originalRadius);
+		var flag = true;
+
+		node.on('mouseover',  function (d) {
+			// console.log('hover', d.name || d.fullname);
+			if (flag) d.kudos.push(kudo);
+			var offset = 20;
+			// var offset = d.children ? 45 : Math.sqrt(d.size) / 10;
+			// var offset = d.children ? 30 : d.size*10;
+			// name = d.name;
+			// xPos = d.x - offset/4;
+			// yPos = d.y;
+			oldColor = d3.select(this).style('fill');
+			d3.select(this).style('fill', 'black');
+			var y = kudos
+				.append('text')
+
+				y.attr('id', 'text')
+				.attr('dx', d.x)
+				.attr('dy', d.y + 5)
+				.style('fill', '#000')
+				.text(d.name ? d.name.toUpperCase() : d.fullname + ' (' + d.kudos.length + ')');
+				// .text('dudde!');
+			// kudos.select('text').text('DSLFGHDFGKHDFG')
+			var bbox = y.node().getBBox();
+				y.attr('dx', d.x - bbox.width/2);
+				y.attr('dy', d.y + (d.r || offset) + bbox.height);
+
+			flag = false;
+		});
+	});
+
 	function tick() {
 		link.attr('x1', function (d) { return d.source.x; })
 			.attr('y1', function (d) { return d.source.y; })

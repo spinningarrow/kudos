@@ -65,10 +65,6 @@
 					kudosBox.setProps({ data: kudosData });
 				});
 
-				// Transition node (tricky)
-				var node = d3.select('.node.' + kudo.recipient);
-				var originalRadius = node.attr('r');
-				node.transition().duration(150).attr('r', +originalRadius + 100).transition().attr('r', originalRadius);
 			});
 
 			React.render(<LoginForm />, document.querySelector('.content-login-form'));
