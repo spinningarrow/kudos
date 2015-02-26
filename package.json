@@ -4,6 +4,7 @@
   "description": "Give kudos to your teammates!",
   "main": "index.html",
   "scripts": {
+    "watch": "watchify -vo public/js/app.js app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
