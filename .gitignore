@@ -2,3 +2,4 @@ data
 .dpd
 public/lib
 public/images
+node_modules
