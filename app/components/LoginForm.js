@@ -1,3 +1,5 @@
+var React = require('react');
+
 var LoginForm = React.createClass({
 
 	handleSubmit: function (event) {
@@ -39,3 +41,5 @@ var LoginForm = React.createClass({
 		);
 	}
 });
+
+module.exports = LoginForm;
