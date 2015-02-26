@@ -1,3 +1,7 @@
+var React = require('react');
+var SignedInUser = require('./SignedInUser');
+var SignedOutUser = require('./SignedOutUser');
+
 var CurrentUserBox = React.createClass({
 	getInitialState: function () {
 		return {user: {}};
@@ -37,3 +41,5 @@ var CurrentUserBox = React.createClass({
 		);
 	}
 });
+
+module.exports = CurrentUserBox;

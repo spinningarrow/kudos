@@ -1,7 +1,6 @@
 var React = require('react');
 
 var LoginForm = React.createClass({
-
 	handleSubmit: function (event) {
 		event.preventDefault();
 
@@ -19,6 +18,7 @@ var LoginForm = React.createClass({
 		}, function (result, error) {
 			if (!error) {
 				loginDone();
+				console.log('Logged in!', result);
 				return;
 			}
 

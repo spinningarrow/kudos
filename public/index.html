@@ -68,40 +68,10 @@
 
 			});
 
-			React.render(<LoginForm />, document.querySelector('.content-login-form'));
-			var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('.current-user-badge'));
 			var kudosBox = React.render(<KudosBox data={kudosData} selectedUser={null} />, document.querySelector('aside'));
 			// var userList = React.render(<UsersList />, document.querySelector('section'));
 
-			function loginDone() {
-				dpd.users.me(function (user) {
-					currentUserBox.setState({ user: user.fullname });
-					// $('main').hide();
-					toggleSections('everything');
-				});
-			}
-
-			function toggleSections(sectionToShow) {
-				$('.content-login-form').hide();
-				$('.content-everything').hide();
-
-				if (sectionToShow === 'login') {
-					$('.content-login-form').show();
-				} else if (sectionToShow === 'everything') {
-					$('.content-everything').show();
-				}
-			}
-
-			toggleSections(); // hide everything
-			// Hide login form if logged in
 			// $('main').hide();
-			dpd.users.me(function (user) {
-				if (!user) {
-					toggleSections('login');
-				} else {
-					toggleSections('everything');
-				}
-			});
 		</script>
 
 		<script src="js/app.js"></script>

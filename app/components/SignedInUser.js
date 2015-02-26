@@ -1,3 +1,5 @@
+var React = require('react');
+
 var SignedInUser = React.createClass({
 	render: function () {
 		return (
@@ -8,3 +10,5 @@ var SignedInUser = React.createClass({
 		);
 	}
 });
+
+module.exports = SignedInUser;
