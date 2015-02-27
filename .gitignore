@@ -3,3 +3,4 @@ data
 public/lib
 public/images
 node_modules
+public/js/app.js
