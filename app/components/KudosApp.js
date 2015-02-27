@@ -28,7 +28,7 @@ var KudosApp = React.createClass({
 			username: username,
 			password: password
 		}, function (res, err) {
-			if (err) return;
+			if (err) throw err;
 
 			dpd.users.me(function (user) {
 				this.setState({
@@ -38,13 +38,23 @@ var KudosApp = React.createClass({
 		}.bind(this));
 	},
 
+	handleLogout: function () {
+		dpd.users.logout(function (res, err) {
+			if (err) throw err;
+
+			this.setState({
+				currentUser: null
+			});
+		}.bind(this));
+	},
+
 	render: function () {
 		return (
 			<div className="kudos-app">
 				<header>
 					<h1>Kudos</h1>
 					<div className="current-user-badge">
-						<CurrentUserBox user={this.state.currentUser}/>
+						<CurrentUserBox user={this.state.currentUser} handleLogout={this.handleLogout}/>
 					</div>
 				</header>
 				<main>

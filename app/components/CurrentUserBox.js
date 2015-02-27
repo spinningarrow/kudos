@@ -3,14 +3,7 @@ var React = require('react');
 var CurrentUserBox = React.createClass({
 	handleSignOutClick: function (event) {
 		event.preventDefault();
-
-		dpd.users.logout(function (result, error) {
-			if (!error) {
-				this.setState({ user: '' });
-				// $('main').show();
-				toggleSections('login');
-			}
-		}.bind(this));
+		this.props.handleLogout();
 	},
 
 	handleSignInClick: function (event) {

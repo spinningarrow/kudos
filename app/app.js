@@ -1,7 +1,5 @@
 var React = require('react');
 var KudosApp = require('./components/KudosApp');
-// var LoginForm = require('./components/LoginForm');
-// var CurrentUserBox = require('./components/CurrentUserBox');
 
 // START Temporary code - need to remove
 			loginDone = function loginDone() {
@@ -33,8 +31,6 @@ var KudosApp = require('./components/KudosApp');
 				}
 			});
 
-// var currentUserBox = React.render(<CurrentUserBox />, document.querySelector('.current-user-badge'));
 // END temporary code
 
-// React.render(<LoginForm />, document.querySelector('.content-login-form'));
 React.render(<KudosApp/>, document.body);
