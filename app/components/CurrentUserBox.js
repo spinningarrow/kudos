@@ -1,18 +1,6 @@
 var React = require('react');
-var SignedInUser = require('./SignedInUser');
-var SignedOutUser = require('./SignedOutUser');
 
 var CurrentUserBox = React.createClass({
-	getInitialState: function () {
-		return {user: {}};
-	},
-
-	componentDidMount: function () {
-		dpd.users.me(function (user) {
-			this.setState({user: user ? user.fullname : ''});
-		}.bind(this));
-	},
-
 	handleSignOutClick: function (event) {
 		event.preventDefault();
 
@@ -27,16 +15,24 @@ var CurrentUserBox = React.createClass({
 
 	handleSignInClick: function (event) {
 		event.preventDefault();
-
-		// Focus the username field
 		$('input[placeholder="Username"]').focus();
 	},
 
 	render: function () {
+		if (this.props.user) {
+			return (
+				<div>
+					<div className="signed-in-user">
+						<span>{this.props.user.fullname}</span>
+						<a href="#" onClick={this.handleSignOutClick}>Sign out</a>
+					</div>
+				</div>
+			);
+		}
+
 		return (
 			<div>
-				{ this.state.user ? <SignedInUser userFullName={this.state.user} handleSignOutClick={this.handleSignOutClick} /> :
-					<SignedOutUser handleSignInClick={this.handleSignInClick} /> }
+				<a href="#" onClick={this.handleSignInClick}>Sign in</a>
 			</div>
 		);
 	}
