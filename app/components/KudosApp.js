@@ -4,6 +4,7 @@
 var React = require('react');
 var CurrentUserBox = require('./CurrentUserBox');
 var LoginForm = require('./LoginForm');
+var KudosBox = require('./KudosBox');
 
 var KudosApp = React.createClass({
 	getInitialState: function () {
@@ -20,6 +21,12 @@ var KudosApp = React.createClass({
 					currentUser: user
 				});
 			}
+		}.bind(this));
+
+		dpd.users.get(function (users) {
+			this.setState({
+				userData: users
+			});
 		}.bind(this));
 	},
 
@@ -59,6 +66,9 @@ var KudosApp = React.createClass({
 				</header>
 				<main>
 					{!this.state.currentUser && <LoginForm handleLogin={this.handleLogin}/>}
+					<aside>
+						<KudosBox data={this.state.userData} selectedUser={this.state.currentUser}/>
+					</aside>
 				</main>
 			</div>
 		);
