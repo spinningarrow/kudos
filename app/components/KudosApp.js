@@ -66,6 +66,7 @@ var KudosApp = React.createClass({
 				</header>
 				<main>
 					{!this.state.currentUser && <LoginForm handleLogin={this.handleLogin}/>}
+					<div id="divisions"></div>
 					<aside>
 						<KudosBox data={this.state.userData} selectedUser={this.state.currentUser}/>
 					</aside>
