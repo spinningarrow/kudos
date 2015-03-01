@@ -23,17 +23,6 @@ var KudosList = React.createClass({
 			);
 		}.bind(this)).reverse();
 
-		// Highlight nodes which commented on this user
-		// var authors = _.uniq(_.pluck(kudos, 'author'));
-		// _.each(authors, function (author) {
-		// 	var d3node = d3.select('.node.' + author);
-		// 	var oldColor;
-		// 	try {
-		// 		oldColor = d3Node.style('fill');
-		// 	} catch (e) {}
-		// 	d3node.style('fill', 'blue');
-		// });
-
 		return (
 			<div className="kudos-list">
 				{nodes}

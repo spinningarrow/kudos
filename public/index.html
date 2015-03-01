@@ -17,9 +17,6 @@
 
 		<script src="js/divisions.js"></script>
 		<script src="js/colorbrewer.js"></script>
-
-		<!-- <script src="lib/react/react.js"></script> -->
-		<!-- <script src="lib/react/JSXTransformer.js"></script> -->
 	</head>
 	<body>
 		<header>
@@ -34,45 +31,6 @@
 				<aside class="kudos-sidebar"></aside>
 			</div>
 		</main>
-
-		<!-- React components -->
-		<!-- <script type="text/jsx" src="react/LoginForm.jsx"></script> -->
-		<!-- <script type="text/jsx" src="react/CurrentUserBox.jsx"></script> -->
-		<!-- <script type="text/jsx" src="react/SignedInUser.jsx"></script> -->
-		<!-- <script type="text/jsx" src="react/SignedOutUser.jsx"></script> -->
-		<!-- <script type="text/jsx" src="react/Kudos.jsx"></script> -->
-		<!-- <script type="text/jsx" src="react/UsersList.jsx"></script> -->
-
-		<!-- Render stuff on the page -->
-		<script type="text/jsx">
-			var kudosData = [
-				{ author: 'Peter Hunter', text: 'awesome is the new awesome' },
-				{ author: 'Jordana Walker', text: 'nice is the new cool' }
-			];
-
-			dpd.users.get(function (users) {
-				kudosData = users;
-				console.log('users gotten');
-				React.render(<KudosBox data={kudosData} />, document.querySelector('aside'));
-			});
-
-			dpd.on('kudos:created', function (kudo) {
-
-				// Render user list again
-				dpd.users.get(function (users) {
-					// userList.setState({ data: users });
-
-					kudosData = users;
-					kudosBox.setProps({ data: kudosData });
-				});
-
-			});
-
-			var kudosBox = React.render(<KudosBox data={kudosData} selectedUser={null} />, document.querySelector('aside'));
-			// var userList = React.render(<UsersList />, document.querySelector('section'));
-
-			// $('main').hide();
-		</script>
 
 		<script src="js/app.js"></script>
 	</body>

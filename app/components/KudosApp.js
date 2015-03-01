@@ -28,6 +28,14 @@ var KudosApp = React.createClass({
 				userData: users
 			});
 		}.bind(this));
+
+		dpd.on('kudos:created', function (kudo) {
+			dpd.users.get(function (users) {
+				this.setState({
+					userData: users
+				});
+			}.bind(this));
+		}.bind(this));
 	},
 
 	handleLogin: function (username, password) {
