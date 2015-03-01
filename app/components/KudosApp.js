@@ -5,12 +5,14 @@ var React = require('react');
 var CurrentUserBox = require('./CurrentUserBox');
 var LoginForm = require('./LoginForm');
 var KudosBox = require('./KudosBox');
+var TeamGraph = require('./TeamGraph');
 
 var KudosApp = React.createClass({
 	getInitialState: function () {
 		return {
 			currentUser: null,
-			selectedUser: null
+			selectedUser: null,
+			userData: null
 		};
 	},
 
@@ -72,6 +74,12 @@ var KudosApp = React.createClass({
 		});
 	},
 
+	handleLeafNodeClick: function (user) {
+		this.setState({
+			selectedUser: user
+		});
+	},
+
 	render: function () {
 		return (
 			<div className="kudos-app">
@@ -83,7 +91,7 @@ var KudosApp = React.createClass({
 				</header>
 				<main>
 					{!this.state.currentUser && <LoginForm handleLogin={this.handleLogin}/>}
-					<div id="divisions"></div>
+					{this.state.currentUser && <TeamGraph data={this.state.userData} handleLeafNodeClick={this.handleLeafNodeClick}/>}
 					<aside>
 						<KudosBox data={this.state.userData}
 							selectedUser={this.state.selectedUser}
