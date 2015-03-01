@@ -9,7 +9,8 @@ var KudosBox = require('./KudosBox');
 var KudosApp = React.createClass({
 	getInitialState: function () {
 		return {
-			currentUser: null
+			currentUser: null,
+			selectedUser: null
 		};
 	},
 
@@ -63,6 +64,14 @@ var KudosApp = React.createClass({
 		}.bind(this));
 	},
 
+	handleHideBox: function (event) {
+		event.preventDefault();
+
+		this.setState({
+			selectedUser: null
+		});
+	},
+
 	render: function () {
 		return (
 			<div className="kudos-app">
@@ -76,7 +85,9 @@ var KudosApp = React.createClass({
 					{!this.state.currentUser && <LoginForm handleLogin={this.handleLogin}/>}
 					<div id="divisions"></div>
 					<aside>
-						<KudosBox data={this.state.userData} selectedUser={this.state.currentUser}/>
+						<KudosBox data={this.state.userData}
+							selectedUser={this.state.selectedUser}
+							handleHideBox={this.handleHideBox}/>
 					</aside>
 				</main>
 			</div>

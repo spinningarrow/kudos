@@ -3,16 +3,14 @@ var KudosForm = require('./KudosForm');
 var KudosList = require('./KudosList');
 
 var KudosBox = React.createClass({
-	hideBox: function (event) {
-		event.preventDefault();
-
-		// this.setState({ hidden: true });
-	},
-
 	render: function () {
+		if (!this.props.selectedUser) {
+			return <div className='kudos-box hidden'></div>;
+		}
+
 		return (
-			<div className={ 'kudos-box' }>
-				<a href="#" className="close-kudos-box" onClick={this.hideBox}>&times;</a>
+			<div className='kudos-box'>
+				<a href="#" className="close-kudos-box" onClick={this.props.handleHideBox}>&times;</a>
 				<h2>
 					<img src={this.props.selectedUser && 'images/' + this.props.selectedUser.username + '.jpg'}/>
 					<span className="kudos-user">{this.props.selectedUser && this.props.selectedUser.fullname}</span>
