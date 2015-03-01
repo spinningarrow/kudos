@@ -5,9 +5,11 @@ var KudosList = require('./KudosList');
 var KudosBox = React.createClass({
 	render: function () {
 		if (!this.props.selectedUser) {
+			$('body').removeClass('box-open');
 			return <div className='kudos-box hidden'></div>;
 		}
 
+		$('body').addClass('box-open');
 		return (
 			<div className='kudos-box'>
 				<a href="#" className="close-kudos-box" onClick={this.props.handleHideBox}>&times;</a>
