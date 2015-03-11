@@ -1,28 +1,17 @@
-var LoginForm = React.createClass({
+var React = require('react');
 
+var LoginForm = React.createClass({
 	handleSubmit: function (event) {
 		event.preventDefault();
 
 		var username = this.refs.username.getDOMNode().value.trim();
 		var password = this.refs.password.getDOMNode().value.trim();
 
-		if (!username || !password) {
-			return;
-		}
+		if (!username || !password) return;
 
-		// Log the user in
-		dpd.users.login({
-			username: username,
-			password: password
-		}, function (result, error) {
-			if (!error) {
-				loginDone();
-				return;
-			}
+		this.props.handleLogin(username, password);
 
-			console.log('Login error', error);
-		});
-
+		// Reset the username and password fields
 		this.refs.username.getDOMNode().value = '';
 		this.refs.password.getDOMNode().value = '';
 
@@ -39,3 +28,5 @@ var LoginForm = React.createClass({
 		);
 	}
 });
+
+module.exports = LoginForm;

@@ -1,0 +1,35 @@
+{
+  "name": "Kudos",
+  "version": "1.0.0",
+  "description": "Give kudos to your teammates!",
+  "main": "index.html",
+  "scripts": {
+    "watch": "watchify -vo public/js/app.js app/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spinningarrow/kudos.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spinningarrow/kudos/issues"
+  },
+  "homepage": "https://github.com/spinningarrow/kudos",
+  "browserify": {
+    "transform": [
+      [
+        "reactify"
+      ]
+    ]
+  },
+  "dependencies": {
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "reactify": "^1.0.0",
+    "watchify": "^2.4.0"
+  }
+}
