@@ -26,12 +26,15 @@ var KudosApp = React.createClass({
 			}
 		}.bind(this));
 
+		// Get the data (kudos and user details) for all users
 		dpd.users.get(function (users) {
 			this.setState({
 				userData: users
 			});
 		}.bind(this));
 
+		// Update the data when a new kudo is created (either locally or from
+		// another instance)
 		dpd.on('kudos:created', function (kudo) {
 			dpd.users.get(function (users) {
 				this.setState({

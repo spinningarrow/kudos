@@ -3,8 +3,10 @@
 var React = require('react');
 
 var TeamGraph = React.createClass({
+	// Render the component only the first time (otherwise D3 keeps appending
+	// the SVG element)
 	shouldComponentUpdate: function (nextProps, nextState) {
-		return nextProps.data !== this.props.data;
+		return !this.props.data && nextProps.data;
 	},
 
 	render: function () {
