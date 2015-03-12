@@ -2,5 +2,6 @@ data
 .dpd
 public/lib
 public/images
+public/images-unedited
 node_modules
 public/js/app.js
