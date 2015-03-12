@@ -8,7 +8,7 @@ var KudosBox = require('./KudosBox');
 var TeamGraph = require('./TeamGraph');
 
 var KudosApp = React.createClass({
-	getInitialState: function () {
+	getInitialState() {
 		return {
 			currentUser: null,
 			selectedUser: null,
@@ -16,7 +16,7 @@ var KudosApp = React.createClass({
 		};
 	},
 
-	componentDidMount: function () {
+	componentDidMount() {
 		// Check if the user is already signed in
 		dpd.users.me((user) => {
 			if (user) {
@@ -44,7 +44,7 @@ var KudosApp = React.createClass({
 		});
 	},
 
-	handleLogin: function (username, password) {
+	handleLogin(username, password) {
 		dpd.users.login({
 			username: username,
 			password: password
@@ -59,7 +59,7 @@ var KudosApp = React.createClass({
 		});
 	},
 
-	handleLogout: function () {
+	handleLogout() {
 		dpd.users.logout((res, err) => {
 			if (err) throw err;
 
@@ -69,7 +69,7 @@ var KudosApp = React.createClass({
 		});
 	},
 
-	handleHideBox: function (event) {
+	handleHideBox(event) {
 		event.preventDefault();
 
 		this.setState({
@@ -77,7 +77,7 @@ var KudosApp = React.createClass({
 		});
 	},
 
-	handleLeafNodeClick: function (user) {
+	handleLeafNodeClick(user) {
 		this.setState({
 			selectedUser: user
 		});
