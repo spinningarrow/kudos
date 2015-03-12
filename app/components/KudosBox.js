@@ -17,7 +17,7 @@ var KudosBox = React.createClass({
 					<img src={this.props.selectedUser && 'images/' + this.props.selectedUser.username + '.jpg'}/>
 					<span className="kudos-user">{this.props.selectedUser && this.props.selectedUser.fullname}</span>
 				</h2>
-				<KudosForm selectedUser={this.props.selectedUser}/>
+				<KudosForm selectedUser={this.props.selectedUser} handleSubmit={this.props.handleFormSubmit}/>
 				<KudosList data={this.props.data} selectedUser={this.props.selectedUser}/>
 			</div>
 		);
