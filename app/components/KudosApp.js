@@ -89,8 +89,7 @@ var KudosApp = React.createClass({
 		dpd.kudos.post({
 			recipient: this.state.selectedUser.username,
 			author: this.state.currentUser.username,
-			text: textNode.value.trim(),
-			date: new Date().toISOString()
+			text: textNode.value.trim()
 		}, function () {
 			textNode.value = ''; // empty the textarea
 		});
