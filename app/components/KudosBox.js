@@ -14,7 +14,7 @@ var KudosBox = React.createClass({
 			<div className='kudos-box'>
 				<a href="#" className="close-kudos-box" onClick={this.props.handleHideBox}>&times;</a>
 				<h2>
-					<img src={this.props.selectedUser && 'images/' + this.props.selectedUser.username + '.jpg'}/>
+					<img src={this.props.selectedUser && 'images/' + this.props.selectedUser.username + '.png'}/>
 					<span className="kudos-user">{this.props.selectedUser && this.props.selectedUser.fullname}</span>
 				</h2>
 				<KudosForm selectedUser={this.props.selectedUser} handleSubmit={this.props.handleFormSubmit}/>
