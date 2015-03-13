@@ -1,11 +1,11 @@
 var React = require('react');
 
 var LoginForm = React.createClass({
-	handleSubmit: function (event) {
+	handleSubmit(event) {
 		event.preventDefault();
 
-		var username = this.refs.username.getDOMNode().value.trim();
-		var password = this.refs.password.getDOMNode().value.trim();
+		let username = this.refs.username.getDOMNode().value.trim();
+		let password = this.refs.password.getDOMNode().value.trim();
 
 		if (!username || !password) return;
 
@@ -18,7 +18,7 @@ var LoginForm = React.createClass({
 		return;
 	},
 
-	render: function () {
+	render() {
 		return (
 			<form className="login-form" onSubmit={this.handleSubmit}>
 				<input type="text" placeholder="Username" required ref="username" /><br />

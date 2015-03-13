@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Kudo = React.createClass({
-	render: function () {
+	render() {
 		return (
 			<div className="kudo">
 				<span className="kudo-author">{this.props.author}</span>

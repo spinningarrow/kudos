@@ -1,12 +1,12 @@
 var React = require('react');
 
 var KudosForm = React.createClass({
-	handleSubmit: function (event) {
+	handleSubmit(event) {
 		event.preventDefault();
 		this.props.handleSubmit(this.refs.kudoText.getDOMNode());
 	},
 
-	render: function () {
+	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<textarea ref="kudoText" required></textarea>

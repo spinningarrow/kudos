@@ -1,5 +1,5 @@
-// This is the main parent component which holds the other subcomponents and
-// stores the state of the application
+// This is the main parent component which holds the other subcomponents
+// and stores the state of the application.
 
 var React = require('react');
 var CurrentUserBox = require('./CurrentUserBox');
@@ -33,8 +33,8 @@ var KudosApp = React.createClass({
 			});
 		});
 
-		// Update the data when a new kudo is created (either locally or from
-		// another instance)
+		// Update the data when a new kudo is created
+		// (either locally or from another instance)
 		dpd.on('kudos:created', (kudo) => {
 			dpd.users.get((users) => {
 				this.setState({
