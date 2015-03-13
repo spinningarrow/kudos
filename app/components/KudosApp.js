@@ -83,6 +83,18 @@ var KudosApp = React.createClass({
 		});
 	},
 
+	handleFormSubmit: function (textNode) {
+		if (!this.state.currentUser || !this.state.selectedUser) return;
+
+		dpd.kudos.post({
+			recipient: this.state.selectedUser.username,
+			author: this.state.currentUser.username,
+			text: textNode.value.trim()
+		}, function () {
+			textNode.value = ''; // empty the textarea
+		});
+	},
+
 	render: function () {
 		return (
 			<div className="kudos-app">
@@ -98,7 +110,8 @@ var KudosApp = React.createClass({
 					<aside>
 						<KudosBox data={this.state.userData}
 							selectedUser={this.state.selectedUser}
-							handleHideBox={this.handleHideBox}/>
+							handleHideBox={this.handleHideBox}
+							handleFormSubmit={this.handleFormSubmit}/>
 					</aside>
 				</main>
 			</div>
