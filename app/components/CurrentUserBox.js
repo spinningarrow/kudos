@@ -1,10 +1,10 @@
-var React = require('react');
+let React = require('react');
 
-var CurrentUserBox = React.createClass({
+let CurrentUserBox = React.createClass({
 	handleSignInClick(event) {
 		event.preventDefault();
 
-		$('input[placeholder="Username"]').focus();
+		document.querySelector('input[placeholder="Username"]').focus();
 	},
 
 	handleSignOutClick(event) {

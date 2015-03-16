@@ -1,16 +1,16 @@
-var React = require('react');
-var KudosForm = require('./KudosForm');
-var KudosList = require('./KudosList');
+let React = require('react');
+let KudosForm = require('./KudosForm');
+let KudosList = require('./KudosList');
 
-var KudosBox = React.createClass({
+let KudosBox = React.createClass({
 	render() {
 		if (!this.props.selectedUser) {
-			$('body').removeClass('box-open');
+			document.body.classList.remove('box-open');
 
 			return (<div className='kudos-box hidden'></div>);
 		}
 
-		$('body').addClass('box-open');
+		document.body.classList.add('box-open');
 
 		return (
 			<div className='kudos-box'>

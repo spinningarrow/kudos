@@ -1,11 +1,13 @@
-var React = require('react');
+let React = require('react');
+let d3 = require('d3');
+let _ = require('underscore');
 
 // Graph variables
-var width, height;
-var data, theme, o, force;
-var kudos, root, node, link, oldColor, xPos, yPos, name;
+let width, height;
+let data, theme, o, force;
+let kudos, root, node, link, oldColor, xPos, yPos, name;
 
-var TeamGraph = React.createClass({
+let TeamGraph = React.createClass({
 	// Render the component only the first time
 	// (otherwise D3 keeps appending the SVG element)
 	shouldComponentUpdate(nextProps, nextState) {
@@ -15,8 +17,8 @@ var TeamGraph = React.createClass({
 	// Setup the graph/append the svg
 	init() {
 		// Get the width and height of the viewport
-		width = $(document).width() - 50;
-		height = $(document).height() - 100;
+		width = window.innerWidth - 50;
+		height = window.innerHeight - 100;
 
 		// Set the color scheme for the nodes
 		theme = d3.scale.category20();
