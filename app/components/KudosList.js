@@ -1,7 +1,9 @@
-var React = require('react');
-var Kudo = require('./Kudo');
+let React = require('react');
+let Kudo = require('./Kudo');
+let moment = require('moment');
+let _ = require('underscore');
 
-var KudosList = React.createClass({
+let KudosList = React.createClass({
 	render() {
 		if (!this.props.selectedUser || !this.props.data) return (<div />);
 
