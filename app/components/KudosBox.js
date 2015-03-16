@@ -3,19 +3,23 @@ var KudosForm = require('./KudosForm');
 var KudosList = require('./KudosList');
 
 var KudosBox = React.createClass({
-	render: function () {
+	render() {
 		if (!this.props.selectedUser) {
 			$('body').removeClass('box-open');
-			return <div className='kudos-box hidden'></div>;
+
+			return (<div className='kudos-box hidden'></div>);
 		}
 
 		$('body').addClass('box-open');
+
 		return (
 			<div className='kudos-box'>
 				<a href="#" className="close-kudos-box" onClick={this.props.handleHideBox}>&times;</a>
 				<h2>
-					<img src={this.props.selectedUser && 'images/' + this.props.selectedUser.username + '.png'}/>
-					<span className="kudos-user">{this.props.selectedUser && this.props.selectedUser.fullname}</span>
+					<img src={this.props.selectedUser && 'images/' +
+						this.props.selectedUser.username + '.png'}/>
+					<span className="kudos-user">{this.props.selectedUser &&
+						this.props.selectedUser.fullname}</span>
 				</h2>
 				<KudosForm selectedUser={this.props.selectedUser} handleSubmit={this.props.handleFormSubmit}/>
 				<KudosList data={this.props.data} selectedUser={this.props.selectedUser}/>

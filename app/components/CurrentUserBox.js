@@ -1,17 +1,19 @@
 var React = require('react');
 
 var CurrentUserBox = React.createClass({
-	handleSignOutClick: function (event) {
+	handleSignInClick(event) {
 		event.preventDefault();
-		this.props.handleLogout();
-	},
 
-	handleSignInClick: function (event) {
-		event.preventDefault();
 		$('input[placeholder="Username"]').focus();
 	},
 
-	render: function () {
+	handleSignOutClick(event) {
+		event.preventDefault();
+
+		this.props.handleLogout();
+	},
+
+	render() {
 		if (this.props.user) {
 			return (
 				<div>

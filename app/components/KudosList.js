@@ -2,26 +2,26 @@ var React = require('react');
 var Kudo = require('./Kudo');
 
 var KudosList = React.createClass({
-	render: function () {
-		if (!this.props.selectedUser || !this.props.data) {
-			return (<div />);
-		}
+	render() {
+		if (!this.props.selectedUser || !this.props.data) return (<div />);
 
-		var kudos = _.find(this.props.data, function (user) {
+		let kudos = _.find(this.props.data, (user) => {
 			return user.username === this.props.selectedUser.username;
-		}, this).kudos;
+		}).kudos;
 
-		var nodes = kudos.map(function (kudo) {
+		let nodes = kudos.map((kudo) => {
 			// Get author's full name
-			var users = this.props.data;
-			var author = _.find(users, function (user) {
+			let users = this.props.data;
+			let author = _.find(users, (user) => {
 				return user.username === kudo.author;
 			});
 
 			return (
-				<Kudo author={author.fullname} date={moment(kudo.date || new Date().toISOString()).fromNow()}>{kudo.text}</Kudo>
+				<Kudo author={author.fullname}
+					date={moment(kudo.date || new Date().toISOString()).fromNow()}>
+					{kudo.text}</Kudo>
 			);
-		}.bind(this)).reverse();
+		}).reverse();
 
 		return (
 			<div className="kudos-list">
