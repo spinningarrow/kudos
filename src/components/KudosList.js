@@ -1,6 +1,5 @@
 let React = require('react');
 let KudosNote = require('./KudosNote');
-let moment = require('moment');
 let _ = require('underscore');
 
 module.exports = React.createClass({
@@ -20,8 +19,9 @@ module.exports = React.createClass({
 
 			return (
 				<KudosNote author={author.fullname}
-					date={moment(kudo.date || new Date().toISOString()).fromNow()}>
-					{kudo.text}</KudosNote>
+					date={kudo.date || new Date().toISOString()}>
+					{kudo.text}
+				</KudosNote>
 			);
 		}).reverse();
 
