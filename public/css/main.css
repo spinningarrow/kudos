@@ -8,7 +8,6 @@ body {
 		justify-content: center;
 	font-family: 'source sans pro', source-sans-pro, sans-serif;
 	height: 100%;
-	overflow: hidden; /* d3 overflows */
 	transition: margin 0.1s linear;
 }
 
