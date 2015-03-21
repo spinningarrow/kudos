@@ -9,11 +9,11 @@ body {
 	font-family: 'source sans pro', source-sans-pro, sans-serif;
 	height: 100%;
 	overflow: hidden; /* d3 overflows */
-	transition: margin 0.1s ease;
+	transition: margin 0.1s linear;
 }
 
 body.box-open {
-    margin-left: -200px;
+    margin-left: -350px;
 }
 
 /*--- header ---*/
@@ -81,18 +81,19 @@ header h1 {
 	background: rgba(253, 253, 253, 0.95);
 	bottom: 0;
 	box-shadow: 0 0 10px 5px rgba(204, 204, 204, 0.24);
+	box-sizing: border-box;
 	font-size: 0.9em;
 	overflow: auto;
 	padding: 1em;
 	position: fixed;
 	right: 0;
 	top: 0;
-	transition: margin 0.2s ease-in;
+	transition: margin 0.1s linear;
 	width: 350px;
 }
 
 .kudos-box.hidden {
-	margin-right: -100%;
+	margin-right: -350px;
 }
 
 .kudos-box .close-kudos-box {
