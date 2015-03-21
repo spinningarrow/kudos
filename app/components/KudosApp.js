@@ -1,13 +1,13 @@
 // This is the main parent component which holds the other subcomponents
 // and stores the state of the application.
 
-var React = require('react');
-var CurrentUserBox = require('./CurrentUserBox');
-var LoginForm = require('./LoginForm');
-var KudosBox = require('./KudosBox');
-var TeamGraph = require('./TeamGraph');
+let React = require('react');
+let CurrentUserBox = require('./CurrentUserBox');
+let LoginForm = require('./LoginForm');
+let KudosBox = require('./KudosBox');
+let TeamGraph = require('./TeamGraph');
 
-var KudosApp = React.createClass({
+let KudosApp = React.createClass({
 	getInitialState() {
 		return {
 			currentUser: null,
@@ -19,16 +19,16 @@ var KudosApp = React.createClass({
 	componentDidMount() {
 		// Check if the user is already signed in
 		dpd.users.me((user) => {
-			if (user) {
-				this.setState({
-					currentUser: user
-				});
-			}
+			if (user) this.setLoginState(user);
 		});
+	},
 
-		// Get the data (kudos and user details) for all users
+	setLoginState(user) {
+		// Get the data (kudos and user details) for all users and also specify
+		// the logged-in user in the state
 		dpd.users.get((users) => {
 			this.setState({
+				currentUser: user,
 				userData: users
 			});
 		});
@@ -42,7 +42,7 @@ var KudosApp = React.createClass({
 				});
 			});
 		});
-	},
+   },
 
 	handleLogin(username, password) {
 		dpd.users.login({
@@ -52,9 +52,7 @@ var KudosApp = React.createClass({
 			if (err) throw err;
 
 			dpd.users.me((user) => {
-				this.setState({
-					currentUser: user
-				});
+				this.setLoginState(user);
 			});
 		});
 	},
@@ -63,9 +61,14 @@ var KudosApp = React.createClass({
 		dpd.users.logout((res, err) => {
 			if (err) throw err;
 
+			// Remove all state and collection event listeners
 			this.setState({
-				currentUser: null
+				currentUser: null,
+				selectedUser: null,
+				userData: null
 			});
+
+			dpd.off('kudos:created');
 		});
 	},
 
@@ -83,7 +86,7 @@ var KudosApp = React.createClass({
 		});
 	},
 
-	handleFormSubmit: function (textNode) {
+	handleFormSubmit(textNode) {
 		if (!this.state.currentUser || !this.state.selectedUser) return;
 
 		dpd.kudos.post({
@@ -95,7 +98,7 @@ var KudosApp = React.createClass({
 		});
 	},
 
-	render: function () {
+	render() {
 		return (
 			<div className="kudos-app">
 				<header>
