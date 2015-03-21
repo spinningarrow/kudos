@@ -1,7 +1,13 @@
+html {
+	height: 100%;
+}
+
 body {
-	/* margin: 0 auto; */
-	/* width: 600px; */
+	display: flex;
+		align-items: center;
+		justify-content: center;
 	font-family: 'source sans pro', source-sans-pro, sans-serif;
+	height: 100%;
 	overflow: hidden; /* d3 overflows */
 	transition: margin 0.1s ease;
 }
@@ -40,11 +46,12 @@ header h1 {
 	background: rgb(225, 245, 252);
 	border-radius: 100%;
 	box-sizing: border-box;
-	height: 350px;
-	margin: 15% 0 0 35%;
-	padding-top: 110px;
+	display: flex;
+		align-items: center;
+		justify-content: center;
+	height: 20em;
 	text-align: center;
-	width: 350px;
+	width: 20em;
 }
 
 .login-form input {
