@@ -4,10 +4,10 @@
   "description": "Give kudos to your teammates!",
   "main": "index.html",
   "scripts": {
-    "build": "browserify -o public/js/app.js app/app.js",
+    "build": "browserify -o public/js/app.js src/app.js",
     "start": "dpd",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "watchify --debug -vo public/js/app.js app/app.js"
+    "watch": "watchify --debug -vo public/js/app.js src/app.js"
   },
   "repository": {
     "type": "git",
