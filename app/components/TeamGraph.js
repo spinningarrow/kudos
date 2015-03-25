@@ -14,6 +14,11 @@ let TeamGraph = React.createClass({
 		return !this.props.data && nextProps.data;
 	},
 
+	componentDidMount() {
+		this.init();
+		this.update();
+	},
+
 	// Setup the graph/append the svg
 	init() {
 		// Get the width and height of the viewport
@@ -301,14 +306,7 @@ let TeamGraph = React.createClass({
 	},
 
 	render() {
-		if (!this.props.data) return (<div className="team-graph"></div>);
-
-		this.init();
-		this.update();
-
-		return (
-			<div className="team-graph"></div>
-		);
+		return <div className="team-graph"></div>;
 	}
 });
 
