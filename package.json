@@ -6,7 +6,7 @@
   "scripts": {
     "build": "browserify -o public/js/app.js src/main.js",
     "start": "dpd",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "watch": "watchify --debug -vo public/js/app.js src/main.js"
   },
   "repository": {
@@ -36,6 +36,7 @@
   "devDependencies": {
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
+    "jest-cli": "^0.4.0",
     "watchify": "^2.4.0"
   }
 }
