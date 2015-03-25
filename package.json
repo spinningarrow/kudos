@@ -6,7 +6,7 @@
   "scripts": {
     "build": "browserify -o public/js/app.js src/main.js",
     "start": "dpd",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "watch": "watchify --debug -vo public/js/app.js src/main.js"
   },
   "repository": {
@@ -26,7 +26,16 @@
       ]
     ]
   },
+  "jest": {
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "testDirectoryName": "src",
+    "testFileExtensions": ["jest.js"],
+    "unmockedModulePathPatterns": [
+      "./node_modules/react"
+    ]
+  },
   "dependencies": {
+    "babel-jest": "^4.0.0",
     "d3": "^3.5.5",
     "deployd": "^0.8.0",
     "moment": "^2.9.0",
@@ -36,6 +45,7 @@
   "devDependencies": {
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
+    "jest-cli": "^0.4.0",
     "watchify": "^2.4.0"
   }
 }
