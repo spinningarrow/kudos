@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Kudo = React.createClass({
+module.exports = React.createClass({
 	render() {
 		return (
 			<div className="kudo">
@@ -11,5 +11,3 @@ var Kudo = React.createClass({
 		);
 	}
 });
-
-module.exports = Kudo;

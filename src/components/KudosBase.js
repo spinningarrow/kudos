@@ -2,7 +2,7 @@ let React = require('react');
 let KudosForm = require('./KudosForm');
 let KudosList = require('./KudosList');
 
-let KudosBox = React.createClass({
+module.exports = React.createClass({
 	render() {
 		if (!this.props.selectedUser) {
 			document.body.classList.remove('box-open');
@@ -27,5 +27,3 @@ let KudosBox = React.createClass({
 		);
 	}
 });
-
-module.exports = KudosBox;

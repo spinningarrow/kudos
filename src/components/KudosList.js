@@ -1,9 +1,9 @@
 let React = require('react');
-let Kudo = require('./Kudo');
+let KudosNote = require('./KudosNote');
 let moment = require('moment');
 let _ = require('underscore');
 
-let KudosList = React.createClass({
+module.exports = React.createClass({
 	render() {
 		if (!this.props.selectedUser || !this.props.data) return (<div />);
 
@@ -19,9 +19,9 @@ let KudosList = React.createClass({
 			});
 
 			return (
-				<Kudo author={author.fullname}
+				<KudosNote author={author.fullname}
 					date={moment(kudo.date || new Date().toISOString()).fromNow()}>
-					{kudo.text}</Kudo>
+					{kudo.text}</KudosNote>
 			);
 		}).reverse();
 
@@ -32,5 +32,3 @@ let KudosList = React.createClass({
 		);
 	}
 });
-
-module.exports = KudosList;

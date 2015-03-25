@@ -7,7 +7,7 @@ let width, height;
 let data, theme, o, force;
 let kudos, root, node, link, oldColor, xPos, yPos, name;
 
-let TeamGraph = React.createClass({
+module.exports = React.createClass({
 	// Render the component only the first time
 	// (otherwise D3 keeps appending the SVG element)
 	shouldComponentUpdate(nextProps, nextState) {
@@ -309,5 +309,3 @@ let TeamGraph = React.createClass({
 		return <div className="team-graph"></div>;
 	}
 });
-
-module.exports = TeamGraph;
