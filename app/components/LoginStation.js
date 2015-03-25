@@ -1,6 +1,6 @@
 var React = require('react');
 
-var LoginForm = React.createClass({
+module.exports = React.createClass({
 	handleSubmit(event) {
 		event.preventDefault();
 
@@ -28,5 +28,3 @@ var LoginForm = React.createClass({
 		);
 	}
 });
-
-module.exports = LoginForm;

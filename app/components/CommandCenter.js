@@ -1,6 +1,6 @@
 let React = require('react');
 
-let CurrentUserBox = React.createClass({
+module.exports = React.createClass({
 	handleSignInClick(event) {
 		event.preventDefault();
 
@@ -32,5 +32,3 @@ let CurrentUserBox = React.createClass({
 		);
 	}
 });
-
-module.exports = CurrentUserBox;

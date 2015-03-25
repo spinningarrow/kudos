@@ -1,6 +1,6 @@
-var React = require('react');
+let React = require('react');
 
-var KudosForm = React.createClass({
+module.exports = React.createClass({
 	handleSubmit(event) {
 		event.preventDefault();
 		this.props.handleSubmit(this.refs.kudoText.getDOMNode());
@@ -15,5 +15,3 @@ var KudosForm = React.createClass({
 		);
 	}
 });
-
-module.exports = KudosForm;

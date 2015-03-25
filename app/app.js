@@ -1,4 +1,4 @@
-var React = require('react');
-var KudosApp = require('./components/KudosApp');
+let React = require('react');
+let App = require('./components/App');
 
-React.render(<KudosApp/>, document.body);
+React.render(<App/>, document.body);

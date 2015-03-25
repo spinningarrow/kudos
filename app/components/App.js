@@ -2,12 +2,12 @@
 // and stores the state of the application.
 
 let React = require('react');
-let CurrentUserBox = require('./CurrentUserBox');
-let LoginForm = require('./LoginForm');
-let KudosBox = require('./KudosBox');
-let TeamGraph = require('./TeamGraph');
+let CommandCenter = require('./CommandCenter');
+let LoginStation = require('./LoginStation');
+let KudosBase = require('./KudosBase');
+let TeamHub = require('./TeamHub');
 
-let KudosApp = React.createClass({
+module.exports = React.createClass({
 	getInitialState() {
 		return {
 			currentUser: null,
@@ -104,18 +104,18 @@ let KudosApp = React.createClass({
 				<header>
 					<h1>Kudos</h1>
 					<div className="current-user-badge">
-						<CurrentUserBox user={this.state.currentUser}
+						<CommandCenter user={this.state.currentUser}
 							handleLogout={this.handleLogout}/>
 					</div>
 				</header>
 				<main>
 					{!this.state.currentUser &&
-						<LoginForm handleLogin={this.handleLogin}/>}
+						<LoginStation handleLogin={this.handleLogin}/>}
 					{this.state.currentUser &&
-						<TeamGraph data={this.state.userData}
+						<TeamHub data={this.state.userData}
 							handleLeafNodeClick={this.handleLeafNodeClick}/>}
 					<aside>
-						<KudosBox data={this.state.userData}
+						<KudosBase data={this.state.userData}
 							selectedUser={this.state.selectedUser}
 							handleHideBox={this.handleHideBox}
 							handleFormSubmit={this.handleFormSubmit}/>
@@ -125,5 +125,3 @@ let KudosApp = React.createClass({
 		);
 	}
 });
-
-module.exports = KudosApp;
