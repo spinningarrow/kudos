@@ -28,6 +28,8 @@
   },
   "jest": {
     "scriptPreprocessor": "./node_modules/babel-jest",
+    "testDirectoryName": "src",
+    "testFileExtensions": ["jest.js"],
     "unmockedModulePathPatterns": [
       "./node_modules/react"
     ]

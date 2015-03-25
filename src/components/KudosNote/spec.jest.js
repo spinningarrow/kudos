@@ -1,9 +1,9 @@
-jest.dontMock('../src/components/KudosNote.js');
+jest.dontMock('./index.js');
 
 describe('KudosNote', () => {
 	it('displays the author, date and text', () => {
 		let React = require('react/addons');
-		let KudosNote = require('../src/components/KudosNote.js');
+		let KudosNote = require('./index.js');
 		let TestUtils = React.addons.TestUtils;
 
 		let kudosNote = TestUtils.renderIntoDocument(
