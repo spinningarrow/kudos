@@ -5,7 +5,8 @@ let _ = require('underscore');
 // Graph variables
 let width, height;
 let data, theme, o, force;
-let kudos, root, node, link, oldColor, xPos, yPos, name;
+let kudos, root, node, parent, leaf;
+let link, oldColor, xPos, yPos, name;
 
 module.exports = React.createClass({
 	// Render the component only the first time
@@ -52,7 +53,10 @@ module.exports = React.createClass({
 			children: []
 		};
 
-		let groupsMap = _.groupBy(this.props.data, (user) => { return user.teamname; });
+		// Form the teams
+		let groupsMap = _.groupBy(this.props.data, (user) => {
+			return user.teamname;
+		});
 		_.each(groupsMap, (value, key, list) => {
 			data.children.push({
 				name: key,
@@ -60,6 +64,7 @@ module.exports = React.createClass({
 			});
 		});
 
+		// Define the root node
 		root = data;
 		root.fixed = true;
 		root.px = width/2 - 50;
@@ -68,23 +73,24 @@ module.exports = React.createClass({
 		console.log('Here\'s the root info: ', root);
 	},
 
+	// Returns the color scheme
 	color(d) {
-		// return theme(d.name);
 		return o(d.name);
 	},
 
+	// Updates the hub per tick
 	tick() {
 		link.attr('x1', (d) => { return d.source.x; })
 			.attr('y1', (d) => { return d.source.y; })
 			.attr('x2', (d) => { return d.target.x; })
 			.attr('y2', (d) => { return d.target.y; });
 
-		node.attr('cx', (d) => { return d.x; })
-			.attr('cy', (d) => { return d.y; });
+		// node.attr('cx', (d) => { return d.x; })
+		// 	.attr('cy', (d) => { return d.y; });
 
-		// node.attr('transform', (d) => {
-		// 	return 'translate(' + d.x + ',' + d.y + ')';
-		// });
+		node.attr('transform', (d) => {
+			return `translate(${d.x}, ${d.y})`;
+		});
 	},
 
 	// Toggle children on click
@@ -160,50 +166,52 @@ module.exports = React.createClass({
 
 		// Update the nodes
 		node = kudos
-			.selectAll('circle.node')
+			.selectAll('.node')
 			.data(nodes, (d) => { return d.id; })
 
-		node.transition()
-			// .style('fill', 'black')
-			// .attr('r', 20);
-			// .attr('r', (d) => { return d.children ? 45 : Math.sqrt(d.size) / 10; });
-			// .attr('r', (d) => { return d.children ? 30 : d.size*10; });
-
 		// Enter any new nodes
-		let r = 20;
 		node
 			.enter()
-			.append('svg:circle')
+			.append('g')
 			.attr('class', (d) => {
 				let classes = ['node'];
+				console.log(d)
 				d.username && classes.push(d.username);
 				return classes.join(' ');
 			})
-			.attr('cx', (d) => { return d.x; })
-			.attr('cy', (d) => { return d.y; })
-			.attr('r', (d) => {
-				if (d.isRoot) return d.r = r * 3;
-				return d._children ? d.r = r * 2 : r
+			.call(force.drag);
+
+		let r = 20;
+		node
+			.append('image')
+			.attr('xlink:href', (d) => {
+				if (!d.children && !d._children) {
+					return `../images/${d.username}.png`;
+				} else {
+					return `../images/empty.png`;
+				}
 			})
-				// return d.children ? 45 : Math.sqrt(d.size) / 10;
-				// return d.children ? 30 : d.size*10;
-			// })
-			.style('fill', (d) => {
-				// console.log('o', o);
-				return o(d.name || d.teamname);
+			.attr('x', (d) => {
+				if (d.isRoot) return -r*3;
+				else if (d.children || d._children) return -r*2;
+				return -r*2.5;
 			})
-			.on('click', this.click)
+			.attr('y', (d) => {
+				if (d.isRoot) return -r*3;
+				else if (d.children || d._children) return -r*2;
+				return -r*2.5;
+			})
+			.attr('width', (d) => {
+				if (d.isRoot) return r*6;
+				else if (d.children || d._children) return r*4;
+				return r*5;
+			})
+			.attr('height', (d) => {
+				if (d.isRoot) return r*6;
+				else if (d.children || d._children) return r*4;
+				return r*5;
+			})
 			.on('mouseover', function(d) {
-				// console.log('hover', d.name || d.fullname);
-				let offset = r;
-				let isLeafNode = !d.children && !d._children;
-				// let offset = d.children ? 45 : Math.sqrt(d.size) / 10;
-				// let offset = d.children ? 30 : d.size*10;
-				// name = d.name;
-				xPos = d.x - offset/4;
-				yPos = d.y;
-				oldColor = d3.select(this).style('fill');
-				d3.select(this).style('fill', 'black');
 				let fullname = kudos
 					.append('text')
 
@@ -212,86 +220,34 @@ module.exports = React.createClass({
 					.attr('dx', d.x)
 					.attr('dy', d.y + 5)
 					.style('fill', '#000')
-					.text(d.name ? d.name.toUpperCase() : `${d.fullname} (${d.kudos.length})`);
+					.text(d.name ? d.name.toUpperCase() : d.fullname);
+
+				let offset = 0;
+				if (d.isRoot) {
+					offset = r*3;
+				} else if (d.children || d._children) {
+					offset = r*2;
+				} else {
+					offset = r*2.5;
+				}
 
 				let bbox = fullname.node().getBBox();
 				fullname.attr('dx', d.x - bbox.width/2);
-				fullname.attr('dy', d.y + (d.r || offset) + bbox.height);
-
-				if (isLeafNode) {
-					let clip = kudos
-						.append('clipPath')
-						.attr('id', 'clipped')
-						.attr('transform', 'translate(' + d.x + ',' + (d.y + bbox.height + r*4) + ')')
-						.append('circle')
-						.attr('r', r*2);
-
-					let photo = kudos
-						.append('image')
-						.attr('id', 'imgs')
-						.attr('xlink:href', '../images/' + d.username + '.png')
-						.attr('x', d.x - r*2)
-						.attr('y', d.y + bbox.height + r*2)
-						.attr('width', r*4)
-						.attr('height', r*4)
-						.attr('clip-path', 'url(#clipped)');
-				}
-
-				var that = this;
+				fullname.attr('dy', d.y + offset + bbox.height);
 			})
 			.on('mouseout', function(d) {
-				d3.select(this).style('fill', oldColor);
 				let parent = document.getElementById('svg');
 				let texts = document.getElementById('text');
-				let clippath = document.getElementById('clipped');
-				let imgs = document.getElementById('imgs');
 				parent.removeChild(texts);
-				parent.removeChild(clippath);
-				parent.removeChild(imgs);
 			})
-			.call(force.drag);
-
-		// newNode
-			// .append('circle')
-			// .on('mouseover', hover(newNode))
-
-		// newNode
-		// 	.append('clipPath')
-		// 	.attr('id', 'clipped')
-		// 	.append('circle')
-		// 	.attr('r', function (d) { return d.children ? 30 : d.size*15; });
-
-		// newNode
-		// 	.append('image')
-		// 	// .attr('xlink:href', function (d) { return '../images/' + d.name + '.png'; })
-		// 	.attr('xlink:href', 'https://pbs.twimg.com/profile_images/536065384202240000/5Ufzo09P.jpeg')
-		// 	.attr('clip-path', 'url(#clipped)')
-		// 	.attr('x', function (d) {
-		// 		return d.children ? -30 : d.size*(-15);
-		// 	})
-		// 	.attr('y', function (d) {
-		// 		return d.children ? -30 : d.size*(-15);
-		// 	})
-		// 	.attr('width', function (d) {
-		// 		return d.children ? 60 : d.size*30;
-		// 	})
-		// 	.attr('height', function (d) {
-		// 		return d.children ? 60 : d.size*30;
-		// 	})
-
-		// newNode
-		// 	.append('text')
-		// 	.attr('dx', function (d) { return d.children ? 5 : Math.min(30, (d.x - d.size*15/2)); })
-		// 	.attr('dy', '.35em')
-		// 	.style('fill', '#000000')
-		// 	.text(function (d) { return d.children ? '' : d.name; });
+			.on('click', this.click);
 
 		// Exit any old nodes
 		node.exit().remove();
 
 		dpd.on('kudos:created', (kudo) => {
 			// Transition node (tricky)
-			let node = d3.select('.node.' + kudo.recipient);
+			let node = d3.select(`.node.${kudo.recipient}`);
 			let originalRadius = node.attr('r');
 
 			node.transition()
