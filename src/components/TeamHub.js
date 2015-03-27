@@ -196,6 +196,7 @@ module.exports = React.createClass({
 			.on('mouseover', function(d) {
 				// console.log('hover', d.name || d.fullname);
 				let offset = r;
+				let isLeafNode = !d.children && !d._children;
 				// let offset = d.children ? 45 : Math.sqrt(d.size) / 10;
 				// let offset = d.children ? 30 : d.size*10;
 				// name = d.name;
@@ -203,24 +204,50 @@ module.exports = React.createClass({
 				yPos = d.y;
 				oldColor = d3.select(this).style('fill');
 				d3.select(this).style('fill', 'black');
-				let y = kudos
+				let fullname = kudos
 					.append('text')
 
-					y.attr('id', 'text')
+				fullname
+					.attr('id', 'text')
 					.attr('dx', d.x)
 					.attr('dy', d.y + 5)
 					.style('fill', '#000')
 					.text(d.name ? d.name.toUpperCase() : `${d.fullname} (${d.kudos.length})`);
 
-				let bbox = y.node().getBBox();
-				y.attr('dx', d.x - bbox.width/2);
-				y.attr('dy', d.y + (d.r || offset) + bbox.height);
+				let bbox = fullname.node().getBBox();
+				fullname.attr('dx', d.x - bbox.width/2);
+				fullname.attr('dy', d.y + (d.r || offset) + bbox.height);
+
+				if (isLeafNode) {
+					let clip = kudos
+						.append('clipPath')
+						.attr('id', 'clipped')
+						.attr('transform', 'translate(' + d.x + ',' + (d.y + bbox.height + r*4) + ')')
+						.append('circle')
+						.attr('r', r*2);
+
+					let photo = kudos
+						.append('image')
+						.attr('id', 'imgs')
+						.attr('xlink:href', '../images/' + d.username + '.png')
+						.attr('x', d.x - r*2)
+						.attr('y', d.y + bbox.height + r*2)
+						.attr('width', r*4)
+						.attr('height', r*4)
+						.attr('clip-path', 'url(#clipped)');
+				}
+
+				var that = this;
 			})
 			.on('mouseout', function(d) {
 				d3.select(this).style('fill', oldColor);
 				let parent = document.getElementById('svg');
 				let texts = document.getElementById('text');
+				let clippath = document.getElementById('clipped');
+				let imgs = document.getElementById('imgs');
 				parent.removeChild(texts);
+				parent.removeChild(clippath);
+				parent.removeChild(imgs);
 			})
 			.call(force.drag);
 
