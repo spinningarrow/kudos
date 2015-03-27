@@ -1,30 +1,13 @@
-/*#graph {
-	width: 100%;
-	height: 100%;
-}*/
-
-#divisions {
-	margin-top: 40px;
-}
-
+/*--- Links ---*/
 .link {
 	stroke: orange;
 	stroke-opacity: .6;
 }
 
-.node {
-	//stroke: skyblue;
-	stroke-width: 4px;
-}
-
-.node text {
+/*--- Names (on hover) ---*/
+#text {
 	pointer-events: none;
-	font: 10px sans-serif;
+	font: 12px sans-serif;
 	stroke: black;
 	stroke-width: 1px;
-}
-
-.photo {
-	background: red;
-	border: 10px solid pink;
 }
