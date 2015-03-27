@@ -208,7 +208,7 @@ module.exports = React.createClass({
 				else if (d.children || d._children) return r*4;
 				return r*5;
 			})
-			.on('mouseover', function(d) {
+			.on('mouseover', function (d) {
 				let fullname = kudos
 					.append('text')
 
@@ -232,7 +232,7 @@ module.exports = React.createClass({
 				fullname.attr('dx', d.x - bbox.width/2);
 				fullname.attr('dy', d.y + offset + bbox.height);
 			})
-			.on('mouseout', function(d) {
+			.on('mouseout', function (d) {
 				let parent = document.getElementById('svg');
 				let texts = document.getElementById('text');
 				parent.removeChild(texts);
@@ -244,46 +244,22 @@ module.exports = React.createClass({
 
 		dpd.on('kudos:created', (kudo) => {
 			// Transition node (tricky)
-			let node = d3.select(`.node .${kudo.recipient}`);
-			let originalSize = node.attr('width');
+			let leaf = d3.select(`.node .${kudo.recipient}`);
+			let originalSize = leaf.attr('width');
+			let originalXPos = leaf.attr('x');
+			let originalYPos = leaf.attr('y');
 
-			node.transition()
+			leaf.transition()
 				.duration(200)
 				.attr('width', + originalSize + 100)
 				.attr('height', + originalSize + 100)
+				.attr('x', originalXPos - 50)
+				.attr('y', originalYPos - 50)
 				.transition()
 				.attr('width', originalSize)
-				.attr('height', originalSize);
-
-			let flag = true;
-
-			node.on('mouseover', function(d) {
-				// console.log('hover', d.name || d.fullname);
-				if (flag) d.kudos.push(kudo);
-				let offset = 20;
-				// let offset = d.children ? 45 : Math.sqrt(d.size) / 10;
-				// let offset = d.children ? 30 : d.size*10;
-				// name = d.name;
-				// xPos = d.x - offset/4;
-				// yPos = d.y;
-				oldColor = d3.select(this).style('fill');
-				d3.select(this).style('fill', 'black');
-				let y = kudos
-					.append('text')
-
-					y.attr('id', 'text')
-					.attr('dx', d.x)
-					.attr('dy', d.y + 5)
-					.style('fill', '#000')
-					.text(d.name ? d.name.toUpperCase() : `${d.fullname} (${d.kudos.length})`);
-					// .text('dudde!');
-				// kudos.select('text').text('DSLFGHDFGKHDFG')
-				let bbox = y.node().getBBox();
-					y.attr('dx', d.x - bbox.width/2);
-					y.attr('dy', d.y + (d.r || offset) + bbox.height);
-
-				flag = false;
-			});
+				.attr('height', originalSize)
+				.attr('x', originalXPos)
+				.attr('y', originalYPos);
 		});
 	},
 
