@@ -85,9 +85,6 @@ module.exports = React.createClass({
 			.attr('x2', (d) => { return d.target.x; })
 			.attr('y2', (d) => { return d.target.y; });
 
-		// node.attr('cx', (d) => { return d.x; })
-		// 	.attr('cy', (d) => { return d.y; });
-
 		node.attr('transform', (d) => {
 			return `translate(${d.x}, ${d.y})`;
 		});
@@ -169,6 +166,7 @@ module.exports = React.createClass({
 			.selectAll('.node')
 			.data(nodes, (d) => { return d.id; })
 
+		// This is the base of the radius used for circles/images
 		let r = 20;
 
 		// Enter any new nodes
@@ -179,7 +177,7 @@ module.exports = React.createClass({
 			.call(force.drag)
 			.append('image')
 			.attr('class', (d) => {
-				return d.username && d.username;
+				return d.username || '';
 			})
 			.attr('xlink:href', (d) => {
 				if (!d.children && !d._children) {
@@ -210,7 +208,7 @@ module.exports = React.createClass({
 			})
 			.on('mouseover', function (d) {
 				let fullname = kudos
-					.append('text')
+					.append('text');
 
 				fullname
 					.attr('id', 'text')
@@ -219,6 +217,7 @@ module.exports = React.createClass({
 					.style('fill', '#000')
 					.text(d.name ? d.name.toUpperCase() : d.fullname);
 
+				// Used to determine offset for different radii
 				let offset = 0;
 				if (d.isRoot) {
 					offset = r*3;
@@ -228,6 +227,7 @@ module.exports = React.createClass({
 					offset = r*2.5;
 				}
 
+				// To position the text in proportion to node
 				let bbox = fullname.node().getBBox();
 				fullname.attr('dx', d.x - bbox.width/2);
 				fullname.attr('dy', d.y + offset + bbox.height);
@@ -235,6 +235,8 @@ module.exports = React.createClass({
 			.on('mouseout', function (d) {
 				let parent = document.getElementById('svg');
 				let texts = document.getElementById('text');
+
+				// Remove the text
 				parent.removeChild(texts);
 			})
 			.on('click', this.click);
@@ -249,6 +251,7 @@ module.exports = React.createClass({
 			let originalXPos = leaf.attr('x');
 			let originalYPos = leaf.attr('y');
 
+			// Transit the size and position of image
 			leaf.transition()
 				.duration(200)
 				.attr('width', + originalSize + 100)
