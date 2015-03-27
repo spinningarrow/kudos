@@ -23,7 +23,7 @@ module.exports = React.createClass({
 	init() {
 		// Get the width and height of the viewport
 		width = window.innerWidth - 50;
-		height = window.innerHeight - 100;
+		height = window.innerHeight - 50;
 
 		// Set the color scheme for the nodes
 		theme = d3.scale.category20();
