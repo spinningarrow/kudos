@@ -169,21 +169,18 @@ module.exports = React.createClass({
 			.selectAll('.node')
 			.data(nodes, (d) => { return d.id; })
 
+		let r = 20;
+
 		// Enter any new nodes
 		node
 			.enter()
 			.append('g')
-			.attr('class', (d) => {
-				let classes = ['node'];
-				console.log(d)
-				d.username && classes.push(d.username);
-				return classes.join(' ');
-			})
-			.call(force.drag);
-
-		let r = 20;
-		node
+			.attr('class', 'node')
+			.call(force.drag)
 			.append('image')
+			.attr('class', (d) => {
+				return d.username && d.username;
+			})
 			.attr('xlink:href', (d) => {
 				if (!d.children && !d._children) {
 					return `../images/${d.username}.png`;
@@ -247,14 +244,16 @@ module.exports = React.createClass({
 
 		dpd.on('kudos:created', (kudo) => {
 			// Transition node (tricky)
-			let node = d3.select(`.node.${kudo.recipient}`);
-			let originalRadius = node.attr('r');
+			let node = d3.select(`.node .${kudo.recipient}`);
+			let originalSize = node.attr('width');
 
 			node.transition()
-				.duration(150)
-				.attr('r', + originalRadius + 100)
+				.duration(200)
+				.attr('width', + originalSize + 100)
+				.attr('height', + originalSize + 100)
 				.transition()
-				.attr('r', originalRadius);
+				.attr('width', originalSize)
+				.attr('height', originalSize);
 
 			let flag = true;
 
@@ -289,6 +288,6 @@ module.exports = React.createClass({
 	},
 
 	render() {
-		return <div className="team-graph"></div>;
+		return (<div className="team-graph"></div>);
 	}
 });
