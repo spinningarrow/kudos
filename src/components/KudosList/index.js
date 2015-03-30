@@ -1,5 +1,5 @@
 let React = require('react');
-let KudosNote = require('./KudosNote');
+let KudosNote = require('../KudosNote');
 let moment = require('moment');
 let _ = require('underscore');
 
