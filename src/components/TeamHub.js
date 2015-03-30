@@ -4,9 +4,16 @@ let _ = require('underscore');
 
 // Graph variables
 let width, height;
-let data, theme, o, force;
-let kudos, root, node, parent, leaf;
-let link, oldColor, xPos, yPos, name;
+let data, force;
+let kudos, root, node, link;
+let xPos, yPos, name;
+
+// Variables to determine x, y, width, height
+// Based on a radius used for circles/images
+let baseR = 20;
+let rootR = baseR*3;
+let parentR = baseR*1.5;
+let leafR = baseR*2;
 
 module.exports = React.createClass({
 	// Render the component only the first time
@@ -25,10 +32,6 @@ module.exports = React.createClass({
 		// Get the width and height of the viewport
 		width = window.innerWidth - 50;
 		height = window.innerHeight - 100;
-
-		// Set the color scheme for the nodes
-		theme = d3.scale.category20();
-		o = d3.scale.ordinal().range(colorbrewer.Set3[12]);
 
 		// Initialise the forces for the graph
 		force = d3.layout.force()
@@ -71,11 +74,6 @@ module.exports = React.createClass({
 		root.py = height/2 - 25;
 
 		console.log('Here\'s the root info: ', root);
-	},
-
-	// Returns the color scheme
-	color(d) {
-		return o(d.name);
 	},
 
 	// Updates the hub per tick
@@ -135,7 +133,15 @@ module.exports = React.createClass({
 		return nodes;
 	},
 
+	// To set x, y, width, height, offset
+	setSize(d) {
+		if (d.isRoot) return rootR;
+		else if (d.children || d._children) return parentR;
+		return leafR;
+	},
+
 	update() {
+		let that = this;
 		let nodes = this.flatten(root);
 		let links = d3.layout.tree().links(nodes);
 
@@ -166,9 +172,6 @@ module.exports = React.createClass({
 			.selectAll('.node')
 			.data(nodes, (d) => { return d.id; })
 
-		// This is the base of the radius used for circles/images
-		let r = 20;
-
 		// Enter any new nodes
 		node
 			.enter()
@@ -183,29 +186,13 @@ module.exports = React.createClass({
 				if (!d.children && !d._children) {
 					return `../images/${d.username}.png`;
 				} else {
-					return `../images/empty.png`;
+					return `../images/${d.name}.png`;
 				}
 			})
-			.attr('x', (d) => {
-				if (d.isRoot) return -r*3;
-				else if (d.children || d._children) return -r*2;
-				return -r*2.5;
-			})
-			.attr('y', (d) => {
-				if (d.isRoot) return -r*3;
-				else if (d.children || d._children) return -r*2;
-				return -r*2.5;
-			})
-			.attr('width', (d) => {
-				if (d.isRoot) return r*6;
-				else if (d.children || d._children) return r*4;
-				return r*5;
-			})
-			.attr('height', (d) => {
-				if (d.isRoot) return r*6;
-				else if (d.children || d._children) return r*4;
-				return r*5;
-			})
+			.attr('x', (d) => this.setSize(d)*(-1))
+			.attr('y', (d) => this.setSize(d)*(-1))
+			.attr('width', (d) => this.setSize(d)*2)
+			.attr('height', (d) => this.setSize(d)*2)
 			.on('mouseover', function (d) {
 				let fullname = kudos
 					.append('text');
@@ -218,14 +205,7 @@ module.exports = React.createClass({
 					.text(d.name ? d.name.toUpperCase() : d.fullname);
 
 				// Used to determine offset for different radii
-				let offset = 0;
-				if (d.isRoot) {
-					offset = r*3;
-				} else if (d.children || d._children) {
-					offset = r*2;
-				} else {
-					offset = r*2.5;
-				}
+				let offset = that.setSize(d);
 
 				// To position the text in proportion to node
 				let bbox = fullname.node().getBBox();
