@@ -7,7 +7,7 @@
 /*--- Names (on hover) ---*/
 #text {
 	pointer-events: none;
-	font: 12px sans-serif;
+	text-rendering: optimizeLegibility;
 	stroke: black;
 	stroke-width: 1px;
 }
