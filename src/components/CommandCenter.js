@@ -19,16 +19,14 @@ module.exports = React.createClass({
 				<div>
 					<div className="signed-in-user">
 						<span>{this.props.user.fullname}</span>
-						<a href="#" onClick={this.handleSignOutClick}>Sign out</a>
+						<span><a href="#" onClick={this.handleSignOutClick}>Sign out</a></span>
 					</div>
 				</div>
 			);
 		}
 
 		return (
-			<div>
-				<a href="#" onClick={this.handleSignInClick}>Sign in</a>
-			</div>
+			<div></div>
 		);
 	}
 });
