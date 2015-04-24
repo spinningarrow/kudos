@@ -141,7 +141,6 @@ module.exports = React.createClass({
 	},
 
 	update() {
-		let that = this;
 		let nodes = this.flatten(root);
 		let links = d3.layout.tree().links(nodes);
 
@@ -205,13 +204,13 @@ module.exports = React.createClass({
 					.text(d.name ? d.name.toUpperCase() : d.fullname);
 
 				// Used to determine offset for different radii
-				let offset = that.setSize(d);
+				let offset = this.setSize(d);
 
 				// To position the text in proportion to node
 				let bbox = fullname.node().getBBox();
 				fullname.attr('dx', d.x - bbox.width/2);
 				fullname.attr('dy', d.y + offset + bbox.height);
-			})
+			}.bind(this))
 			.on('mouseout', function (d) {
 				let parent = document.getElementById('svg');
 				let texts = document.getElementById('text');
