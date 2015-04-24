@@ -10,10 +10,10 @@ let xPos, yPos, name;
 
 // Variables to determine x, y, width, height
 // Based on a radius used for circles/images
-let baseR = 20;
-let rootR = baseR*3;
-let parentR = baseR*1.5;
-let leafR = baseR*2;
+const BASE_RADIUS = 20;
+const ROOT_RADIUS = BASE_RADIUS * 3;
+const PARENT_RADIUS = BASE_RADIUS * 1.5;
+const LEAF_RADIUS = BASE_RADIUS * 1.5;
 
 module.exports = React.createClass({
 	// Render the component only the first time
@@ -135,9 +135,9 @@ module.exports = React.createClass({
 
 	// To set x, y, width, height, offset
 	setSize(d) {
-		if (d.isRoot) return rootR;
-		else if (d.children || d._children) return parentR;
-		return leafR;
+		if (d.isRoot) return ROOT_RADIUS;
+		else if (d.children || d._children) return PARENT_RADIUS;
+		return LEAF_RADIUS;
 	},
 
 	update() {
