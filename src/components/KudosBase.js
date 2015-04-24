@@ -10,6 +10,9 @@ module.exports = React.createClass({
 			return (<div className='kudos-box hidden'></div>);
 		}
 
+		let showForm =
+			this.props.currentUser.username !== this.props.selectedUser.username;
+
 		document.body.classList.add('box-open');
 
 		return (
@@ -21,7 +24,7 @@ module.exports = React.createClass({
 					<span className="kudos-user">{this.props.selectedUser &&
 						this.props.selectedUser.fullname}</span>
 				</h2>
-				<KudosForm selectedUser={this.props.selectedUser} handleSubmit={this.props.handleFormSubmit}/>
+				{showForm && <KudosForm selectedUser={this.props.selectedUser} handleSubmit={this.props.handleFormSubmit}/>}
 				<KudosList data={this.props.data} selectedUser={this.props.selectedUser}/>
 			</div>
 		);

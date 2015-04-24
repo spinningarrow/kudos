@@ -116,6 +116,7 @@ module.exports = React.createClass({
 							handleLeafNodeClick={this.handleLeafNodeClick}/>}
 					<aside>
 						<KudosBase data={this.state.userData}
+							currentUser={this.state.currentUser}
 							selectedUser={this.state.selectedUser}
 							handleHideBox={this.handleHideBox}
 							handleFormSubmit={this.handleFormSubmit}/>
