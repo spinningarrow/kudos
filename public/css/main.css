@@ -127,8 +127,7 @@ header h1 {
 }
 
 .kudos-box textarea {
-	border-color: #ccc;
-	border-width: 2px;
+	border: 2px solid #ccc;
 	box-sizing: border-box;
 	height: 4em;
 	padding: 5px;
