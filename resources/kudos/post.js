@@ -17,9 +17,10 @@ dpd.users.get({
                 '<title>KUDOS FOR YOU!</title>' +
                 '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>' +
                 '</head><body>' +
+                '<tr style="text-align: center;">' +
                 '<h2 style="line-height: 1.2;">You\'ve got KUDOS from <span style="color: #1BADE8;">' + author.fullname + '</span>!</h2>' +
-                '<span style="background: #E1F5FC; padding: 10px;">' + this.text + '</span>' +
-                '<div style="margin-top: 1em"><a href="http://kudos.ecs.ads.autodesk.com/">Check it out here!</a></div>' +
+                '<div style="background: #E1F5FC; padding: 10px;">' + this.text + '</div>' +
+                '<div style="margin-top: 1em"><a href="http://kudos.ecs.ads.autodesk.com/">Check it out here!</a></tr>' +
                 '</body></html>'
         }, function(result, error) {
             console.log('Result:', result);
