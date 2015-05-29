@@ -1,0 +1,11 @@
+{
+	"type": "Email",
+	"host": "smtp.gmail.com",
+	"port": "465",
+	"ssl": true,
+	"username": "kudos.autodesk@gmail.com",
+	"password": "",
+	"defaultFromAddress": "kudos.autodesk@gmail.com",
+	"internalOnly": false,
+	"productionOnly": false
+}
