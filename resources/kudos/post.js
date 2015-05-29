@@ -1,3 +1,5 @@
+emit('kudos:created', this);
+
 function escapeHtml(unsafe) {
     return unsafe
         .replace(/&/g, '&amp;')
@@ -38,5 +40,3 @@ dpd.users.get({
         });
     });
 });
-
-emit('kudos:created', this);

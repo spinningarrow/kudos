@@ -6,6 +6,7 @@ let CommandCenter = require('./CommandCenter');
 let LoginStation = require('./LoginStation');
 let KudosBase = require('./KudosBase');
 let TeamHub = require('./TeamHub');
+let _ = require('underscore');
 
 module.exports = React.createClass({
 	getInitialState() {
@@ -36,10 +37,14 @@ module.exports = React.createClass({
 		// Update the data when a new kudo is created
 		// (either locally or from another instance)
 		dpd.on('kudos:created', (kudo) => {
-			dpd.users.get((users) => {
-				this.setState({
-					userData: users
-				});
+			let recipient = _.find(this.state.userData, (user) => {
+				return user.username === kudo.recipient;
+			});
+
+			recipient.kudos.push(kudo);
+
+			this.setState({
+				userData: this.state.userData
 			});
 		});
 	},
