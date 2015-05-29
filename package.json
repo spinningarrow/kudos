@@ -29,6 +29,7 @@
   "dependencies": {
     "d3": "^3.5.5",
     "deployd": "^0.8.0",
+    "dpd-email": "^0.1.0",
     "moment": "^2.9.0",
     "react": "^0.12.2",
     "react-emoji": "^0.3.3",
