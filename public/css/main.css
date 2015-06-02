@@ -114,6 +114,7 @@ header h1 {
     background-image: url(attr(data-dude));
     display: inline-block;
     margin-right: 0.5em;
+    vertical-align: middle;
 }
 
 .kudos-box .kudos-user {
@@ -164,6 +165,7 @@ header h1 {
 
 .kudo-author {
 	font-weight: bold;
+	vertical-align: middle;
 }
 
 .kudo-author::after {

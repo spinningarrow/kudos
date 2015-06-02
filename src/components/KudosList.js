@@ -19,6 +19,7 @@ module.exports = React.createClass({
 
 			return (
 				<KudosNote author={author.fullname}
+					username={author.username}
 					date={kudo.date || new Date().toISOString()}>
 					{kudo.text}
 				</KudosNote>
