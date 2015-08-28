@@ -175,7 +175,7 @@ header h1 {
 	display: block;
 }
 
-.kudo-text img {
+.kudo-text .emoticon {
 	border-radius: 0;
 	height: 1.5em;
 	margin: 0;

@@ -15,7 +15,9 @@ module.exports = React.createClass({
 		return (
 			<div className="kudo">
 				<span className="kudo-author">{this.props.author}</span>
-				<span className="kudo-text">{this.emojify(this.props.children)}</span>
+				<span className="kudo-text">{this.emojify(this.props.children, {
+					attributes: {className: 'emoticon'}
+				})}</span>
 				<time className="kudo-date" datetime={isoDate} title={fullDate}>
 					{relativeDate}
 				</time>
