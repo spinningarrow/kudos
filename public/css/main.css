@@ -108,13 +108,14 @@ header h1 {
 }
 
 .kudos-box img {
-    width: 50px;
-    border-radius: 100%;
-    height: 50px;
     background-image: url(attr(data-dude));
+    border-radius: 100%;
     display: inline-block;
+    height: 50px;
     margin-right: 0.5em;
+    min-width: 50px;
     vertical-align: middle;
+    width: 50px;
 }
 
 .kudos-box .kudos-user {
