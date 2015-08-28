@@ -42,7 +42,7 @@ module.exports = React.createClass({
 				});
 			});
 		});
-   },
+	},
 
 	handleLogin(username, password) {
 		dpd.users.login({
