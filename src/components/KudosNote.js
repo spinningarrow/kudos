@@ -10,14 +10,14 @@ module.exports = React.createClass({
 
 		return (
 			<div className="kudo">
-				<div>
-					<img src={userImg}></img>
+				<img src={userImg} />
+				<div className="kudo-info">
 					<span className="kudo-author">{this.props.author}</span>
+					<span className="kudo-text">{this.props.children}</span>
+					<time className="kudo-date" datetime={isoDate} title={fullDate}>
+						{relativeDate}
+					</time>
 				</div>
-				<span className="kudo-text">{this.props.children}</span>
-				<time className="kudo-date" datetime={isoDate} title={fullDate}>
-					{relativeDate}
-				</time>
 			</div>
 		);
 	}
