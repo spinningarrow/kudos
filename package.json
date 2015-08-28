@@ -31,6 +31,7 @@
     "deployd": "^0.8.0",
     "moment": "^2.9.0",
     "react": "^0.12.2",
+    "react-emoji": "^0.3.3",
     "underscore": "^1.8.2"
   },
   "devDependencies": {

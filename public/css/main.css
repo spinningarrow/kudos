@@ -174,3 +174,11 @@ header h1 {
 	color: #c0c0c0;
 	display: block;
 }
+
+.kudo-text .emoticon {
+	border-radius: 0;
+	height: 1.5em;
+	margin: 0;
+	vertical-align: text-bottom;
+	width: auto;
+}
